@@ -1,0 +1,17 @@
+{
+  "$schema": "./schema.json",
+  "api": {
+    "type": "json",
+
+    "port": 8000
+  },
+  "database" : {
+    "type": "postgres",
+
+    "server": "192.168.1.73",
+    "port": 5432,
+    "catalogue": "nosfera",
+    "user": "postgres",
+    "password": "postgres"
+  }
+}
