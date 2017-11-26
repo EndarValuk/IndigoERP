@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "server": {
+          "type": "string",
+          "format": "ip-address"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65536,
+          "format": "int32"
+        },
+        "catalogue": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "server",
+        "port",
+        "catalogue",
+        "user",
+        "password"
+      ]
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "title": "Api response type",
+          "description": "Used to define which protocol to be used for client communication",
+          "type": "string",
+          "enum": ["json", "protobuf"]
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65536
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ]
+    }
+  },
+  "required": [
+    "database",
+    "api"
+  ]
+}
