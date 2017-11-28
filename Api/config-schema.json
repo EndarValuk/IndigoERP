@@ -51,6 +51,11 @@
           "type": "string",
           "enum": ["json", "protobuf"]
         },
+        "compress": {
+          "title": "Api response compression",
+          "description": "Used to define will be enabled api response compression",
+          "type": "boolean"
+        },
         "port": {
           "type": "integer",
           "minimum": 1,

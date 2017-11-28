@@ -2,8 +2,9 @@
   "$schema": "./config-schema.json",
   "api": {
     "type": "json",
+    "compress": false,
 
-    "port": 8000
+    "port": 1337
   },
   "database" : {
     "type": "postgres",
