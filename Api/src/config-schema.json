@@ -10,7 +10,10 @@
       "additionalProperties": false,
       "properties": {
         "type": {
-          "type": "string"
+          "title": "Database backend type",
+          "description": "Used to define which database to be used for storing data",
+          "type": "string",
+          "enum": ["mysql", "sqlite", "postgres", "mssql"]
         },
         "server": {
           "type": "string",
