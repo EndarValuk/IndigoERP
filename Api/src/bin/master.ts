@@ -10,7 +10,7 @@ import "reflect-metadata";
 import { cpus } from "os";
 import * as cluster from 'cluster';
 
-import { logger } from '@indigo/handlers/log';
+import { logger } from '@indigo/handlers';
 
 export class Master {
   public constructor() {

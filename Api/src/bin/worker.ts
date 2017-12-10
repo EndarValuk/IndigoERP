@@ -11,7 +11,7 @@ import { useExpressServer } from "routing-controllers";
  */
 import {
   databaseHandler as db,
-  errorHandler,
+  stateHandler,
   logger,
   poweredHandler,
   timingHandler
@@ -20,39 +20,41 @@ import {
  * Loading routes.
  */
 import { Controllers } from '@indigo/api/controllers';
+import { SystemStateType } from '@indigo/types';
+import SystemState from './state';
 
 const config = require('@indigo/config.json');
 
 export class Worker {
-  public constructor() {
-    let app: express.Application = express();
+  private app: express.Application = express();
 
+  public constructor() {
     /**
      * In development mode we adding timing watcher.
      */
     if (process.env.NODE_ENV !== 'production') {
       logger.info('Timing watch added.');
-      app.use(timingHandler);
+      this.app.use(timingHandler);
     }
 
     // If enabled, adding compression handler
     if(config.api.compress) {
       logger.info('Api response compression enabled.');
-      app.use(compression());
+      this.app.use(compression());
     }
 
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
 
-    // Adding error handler
-    app.use(errorHandler);
-    app.use(poweredHandler);
+    // Adding handlers
+    this.app.use(stateHandler);
+    this.app.use(poweredHandler);
 
     // Mount files from project/public in our site on /public
-    app.use('/public', express.static(path.join(__dirname,'../public')));
+    this.app.use('/public', express.static(path.join(__dirname,'../public')));
 
     // Loading & register all application routes
-    useExpressServer(app, {
+    useExpressServer(this.app, {
       defaults: {
         paramOptions: {
           //with this option, argument will be required by default
@@ -64,17 +66,29 @@ export class Worker {
       classTransformer: false
     });
 
-    app.listen(config.api.port, async() => {
+    SystemState.getInstance().go(SystemStateType.Starting);
+
+    this.app.listen(config.api.port, async() => {
       logger.info(`Bound at port ${config.api.port}!`);
-      try {
-        await db.authenticate();
-        // If we connected to database, log it
-        logger.info('Database connection has been established successfully.');
-      }
-      // Else tell about error
-      catch(e) {
-        logger.error('Unable to connect to the database:', e);
-      };
+      this.checkDatabase();
     });
+  }
+
+  private async checkDatabase(): Promise<void> {
+    try {
+      await db.authenticate();
+      // If we connected to database, log it
+      logger.info('Database connection has been established successfully.');
+      SystemState.getInstance().go(SystemStateType.Working)
+    }
+    // Else tell about error
+    catch(e) {
+      SystemState.getInstance().go(SystemStateType.NoDatabaseConnection);
+      logger.error('Unable to connect to the database:', e);
+
+      setTimeout(() => {
+        this.checkDatabase();
+      }, 5000);
+    };
   }
 }
