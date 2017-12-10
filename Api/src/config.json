@@ -2,7 +2,7 @@
   "$schema": "./config-schema.json",
   "api": {
     "type": "json",
-    "compress": false,
+    "compress": true,
 
     "port": 1337
   },
