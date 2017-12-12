@@ -12,5 +12,6 @@ logger.configure({
     })
   ]
 });
+
 export { logger };
 export default { logger };
