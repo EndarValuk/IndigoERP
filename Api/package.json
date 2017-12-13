@@ -8,10 +8,10 @@
     "url": "https://github.com/EndarValuk/IndigoERP.git/Api"
   },
   "scripts": {
-    "start": "npm run watch:ts",
-    "t": "ts-node -r tsconfig-paths/register src/bin/server.ts",
-    "build:ts": "tsc",
-    "watch:ts": "nodemon --exec ts-node src/bin/server.ts",
+    "start": "npm run view:ts",
+    "build:develop": "tsc",
+    "view:ts": "nodemon --exec ts-node src/bin/server.ts",
+    "view:js": "nodemon --exec node dist/bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "EndarValuk",
@@ -23,7 +23,7 @@
     "@types/node": "^8.0.58",
     "@types/sequelize": "^4.0.79",
     "@types/winston": "^2.3.7",
-    "nodemon": "^1.12.5",
+    "nodemon": "^1.12.6",
     "ts-node": "^4.0.1",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
@@ -34,18 +34,20 @@
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "express-protobuf": "^1.0.1",
+    "http-status-codes": "^1.3.0",
     "module-alias": "^2.0.3",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
     "reflect-metadata": "^0.1.10",
     "routing-controllers": "^0.7.6",
-    "sequelize": "^4.28.0",
+    "sequelize": "^4.28.1",
     "sequelize-typescript": "^0.6.1",
     "tedious": "^2.1.5",
+    "typescript-ioc": "^1.0.2",
     "typestate": "^1.0.5",
     "winston": "^2.4.0"
   },
   "_moduleAliases": {
-    "@indigo": "src"
+    "@indigo": "./src"
   }
 }
