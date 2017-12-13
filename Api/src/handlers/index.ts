@@ -1,4 +1,3 @@
-export * from './api/error';
 export * from './db';
 export * from './http/state';
 export * from './http/powered';

@@ -1,4 +1,4 @@
-export enum SystemStateType {
+enum SystemStateType {
   Idle                    = 0x0,
   Starting                = 0x1,
   CheckingLicense         = 0x2,
@@ -6,3 +6,5 @@ export enum SystemStateType {
   NoDatabaseConnection    = 0x4,
   NoFilestorageConnection = 0x5,
 }
+
+export { SystemStateType }
