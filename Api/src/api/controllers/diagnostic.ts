@@ -6,7 +6,7 @@ export class DiagnosticController {
   /**
    * Diagnostic request
    */
-  @Get("/diag")
+  @Get("/diagnostic")
   onPost() {
     let freeMb = Math.floor(os.freemem() / 1024 / 1024);
     let totalMb = Math.floor(os.totalmem() / 1024 / 1024);
