@@ -5,7 +5,9 @@ import * as express from 'express';
 import * as path from 'path';
 import * as compression from 'compression';
 import * as bodyParser from "body-parser";
+
 import { useExpressServer } from "routing-controllers";
+import { Inject } from 'typescript-ioc';
 /**
  * Loading handlers and configuration.
  */
@@ -21,17 +23,17 @@ import {
  */
 import { Controllers } from '@indigo/api/controllers';
 import { SystemStateType } from '@indigo/types';
-import SystemState from './state';
+import { StateManager } from './state-manager';
 
 const config = require('@indigo/config.json');
 
 export class Worker {
   private app: express.Application = express();
+  @Inject
+  private systemState: StateManager;
 
   public constructor() {
-    /**
-     * In development mode we adding timing watcher.
-     */
+    // In development mode we adding timing watcher.
     if (process.env.NODE_ENV !== 'production') {
       logger.info('Timing watch added.');
       this.app.use(timingHandler);
@@ -47,8 +49,8 @@ export class Worker {
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
     // Adding handlers
-    this.app.use(stateHandler);
     this.app.use(poweredHandler);
+    this.app.use(stateHandler);
 
     // Mount files from project/public in our site on /public
     this.app.use('/public', express.static(path.join(__dirname,'../public')));
@@ -66,10 +68,8 @@ export class Worker {
       classTransformer: false
     });
 
-    SystemState.getInstance().go(SystemStateType.Starting);
-
     this.app.listen(config.api.port, async() => {
-      logger.info(`Bound at port ${config.api.port}!`);
+      logger.info(`Bound at port ${config.api.port}`);
       this.checkDatabase();
     });
   }
@@ -79,13 +79,14 @@ export class Worker {
       await db.authenticate();
       // If we connected to database, log it
       logger.info('Database connection has been established successfully.');
-      SystemState.getInstance().go(SystemStateType.Working)
+      this.systemState.go(SystemStateType.Working)
     }
     // Else tell about error
     catch(e) {
-      SystemState.getInstance().go(SystemStateType.NoDatabaseConnection);
-      logger.error('Unable to connect to the database:', e);
-
+      this.systemState.go(SystemStateType.NoDatabaseConnection);
+      logger.error('Unable to connect to the database:', e.message);
+      // And create retry loop
+      logger.info('We will retry in a 5 secs')
       setTimeout(() => {
         this.checkDatabase();
       }, 5000);

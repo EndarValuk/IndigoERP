@@ -19,8 +19,8 @@ export class Master {
     logger.info(`This machine has ${CPUCount} CPUs`);
     // Recommended to use 1 while in active development.
     if(process.env.NODE_ENV !== 'production') {
-      logger.info('But in development we well use only one');
       CPUCount = 1;
+      logger.info(`But in development we well use only ${CPUCount}`);
     }
 
     // In case of IPC disconnect, wakeup new worker

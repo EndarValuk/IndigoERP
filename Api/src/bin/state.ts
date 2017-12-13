@@ -1,31 +1,18 @@
 import { TypeState } from 'typestate';
 
 import { SystemStateType } from '@indigo/types';
+import { Singleton } from 'typescript-ioc';
 
-class SystemState {
-  private static _instance: TypeState.FiniteStateMachine<SystemStateType>;
+@Singleton
+export class SystemState extends TypeState.FiniteStateMachine<SystemStateType>{
+  constructor() {
+    super(SystemStateType.Idle);
+    // Configuring possible state transitions
+    this.from(SystemStateType.Idle).to(SystemStateType.Starting);
+    this.from(SystemStateType.Starting).to(SystemStateType.NoDatabaseConnection);
+    this.from(SystemStateType.Starting).to(SystemStateType.Working);
 
-  private constructor() {
-    if(SystemState._instance){
-      throw new Error("Error: Instantiation failed. Singleton module! Use .getInstance() instead of new.");
-    }
-    console.log("ST Create")
-    SystemState._instance = new TypeState.FiniteStateMachine<SystemStateType>(SystemStateType.Idle);
-  }
-
-  static getInstance() {
-    if (!SystemState._instance) {
-      SystemState._instance = new TypeState.FiniteStateMachine<SystemStateType>(SystemStateType.Idle);
-      // Configuring possible state transitions
-      SystemState._instance.from(SystemStateType.Idle).to(SystemStateType.Starting);
-      SystemState._instance.from(SystemStateType.Starting).to(SystemStateType.NoDatabaseConnection);
-      SystemState._instance.from(SystemStateType.Starting).to(SystemStateType.Working);
-
-      SystemState._instance.from(SystemStateType.NoDatabaseConnection).to(SystemStateType.NoDatabaseConnection);
-      SystemState._instance.from(SystemStateType.NoDatabaseConnection).to(SystemStateType.Working);
-    }
-    return SystemState._instance;
+    this.from(SystemStateType.NoDatabaseConnection).to(SystemStateType.NoDatabaseConnection);
+    this.from(SystemStateType.NoDatabaseConnection).to(SystemStateType.Working);
   }
 }
-
-export default SystemState;
