@@ -1,11 +1,9 @@
-/**
- * Loading dependencies.
- */
-import { Request, Response, NextFunction } from "express";
+// Loading external dependencies.
+import { Context } from "koa";
 
-const poweredHandler = (req: Request, res: Response, next: NextFunction) => {
-  // Set our own header here
-  res.setHeader('X-Powered-By', 'IndigoERP');
+const poweredHandler = async(ctx: Context, next: () => Promise<void>) => {
+  // Set our own powered header here
+  ctx.set('X-Powered-By', 'IndigoERP API');
   next();
 };
 

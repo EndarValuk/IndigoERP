@@ -1,13 +1,13 @@
 // Loading shims.
 import "reflect-metadata";
-// Loading native cluster
+// Loading native cluster and IoC container
 import * as cluster from 'cluster';
+import { Inject } from 'typescript-ioc';
+// Local dependencies
 import { Master } from './bin/master';
 import { Worker } from './bin/worker';
-// Local dependencies
 import { SystemStateType } from '@indigo/types';
 import { StateManager } from './bin/state-manager';
-import { Inject } from 'typescript-ioc';
 
 /**
  * Application startup class

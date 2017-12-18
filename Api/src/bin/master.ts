@@ -1,9 +1,4 @@
 /**
- * Loading shims.
- */
-require('module-alias/register');
-import "reflect-metadata";
-/**
  * Loading dependencies.
  * Native cluster and logger.
  */

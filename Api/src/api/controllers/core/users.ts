@@ -1,6 +1,8 @@
+// Loading external dependencies.
 import { Inject } from "typescript-ioc";
-import { Controller, Param, Body, Get, Post, Put, Delete, OnUndefined } from "routing-controllers";
-
+import { Context } from 'koa';
+import { Controller, Param, Body, Get, Post, Put, Delete, Ctx } from "routing-controllers";
+// Loading local dependencies.
 import { BaseController } from '@indigo/api/controllers/interfaces';
 import { User } from '@indigo/datasource/models';
 import { UsersRepository } from '@indigo/datasource/repositories';
@@ -14,26 +16,27 @@ export class UsersController implements BaseController<UsersRepository> {
    * Reading user by login
    */
   @Get("/users/:login")
-  @OnUndefined(204)
-  Read(@Param("login") login: string): any {
-    return this._repository.Read(login);
+  async Read(@Ctx() context: Context, @Param("login") login: string): Promise<Context> {
+    context.body = await this._repository.Read(login);
+    return context;
   }
 
   /**
    * Reading all users
    */
   @Get("/users")
-  @OnUndefined(204)
-  ReadAll(): any {
-    return this._repository.ReadAll();
+  async ReadAll(@Ctx() context: Context): Promise<Context> {
+    context.body = await this._repository.ReadAll();
+    return context;
   }
 
   /**
    * Creating user
    */
   @Post("/users")
-  Create(@Body() entry: User): any {
-    return this._repository.Create(entry);
+  async Create(@Ctx() context: Context, @Body() entry: User): Promise<Context> {
+    context.body = await this._repository.Create(entry);
+    return context;
   }
 
   /**
@@ -42,8 +45,9 @@ export class UsersController implements BaseController<UsersRepository> {
    * @param entry User object
    */
   @Put("/users/:id")
-  Update(@Param("id") id: string, @Body() entry: any): any {
-    return this._repository.Update(entry);
+  async Update(@Ctx() context: Context, @Param("id") id: string, @Body() entry: any): Promise<Context> {
+    context.body = await this._repository.Update(entry);
+    return context;
   }
 
   /**
@@ -51,7 +55,8 @@ export class UsersController implements BaseController<UsersRepository> {
    * @param id User login
    */
   @Delete("/users/:id")
-  Delete(@Param("id") id: string): any {
-    return this._repository.Delete(id);
+  async Delete(@Ctx() context: Context, @Param("id") id: string): Promise<Context> {
+    context.body = await this._repository.Delete(id);
+    return context;
   }
 }

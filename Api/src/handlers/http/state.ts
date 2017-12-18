@@ -1,23 +1,21 @@
-/**
- * Loading dependencies.
- */
-import { Request, Response, NextFunction } from "express";
+// Loading external dependencies.
+import { Context } from "koa";
 import * as HttpCodes from 'http-status-codes'
-
+// Loading local dependencies.
 import { StateManager } from '@indigo/bin/state-manager';
 import { SystemStateType } from '@indigo/types';
 
-const stateHandler = (req: Request, res: Response, next: NextFunction) => {
+const stateHandler = async(ctx: Context, next: () => Promise<void>) => {
   let systemState = new StateManager();
 
   switch(systemState.currentState) {
     case SystemStateType.NoDatabaseConnection: {
-      res.statusCode = HttpCodes.SERVICE_UNAVAILABLE;
-      res.statusMessage = HttpCodes.getStatusText(res.statusCode);
-      res.send("NO DB");
+      ctx.status = HttpCodes.SERVICE_UNAVAILABLE;
+      ctx.message = HttpCodes.getStatusText(ctx.status);
+      ctx.body = "NO DB";
     }break;
     default: {
-      next();
+      return next();
     }
   }
 };

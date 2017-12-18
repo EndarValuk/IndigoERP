@@ -1,16 +1,15 @@
 /**
  * Loading dependencies.
  */
-import * as express from 'express';
-import * as path from 'path';
-import * as compression from 'compression';
-import * as bodyParser from "body-parser";
+//import * as path from 'path';
 
-import { useExpressServer } from "routing-controllers";
+import * as koa from 'koa';
+import * as bodyParser from "koa-bodyparser";
+import * as compression from 'koa-compress';
+import * as helmet from 'koa-helmet';
 import { Inject } from 'typescript-ioc';
-/**
- * Loading handlers and configuration.
- */
+import { useKoaServer } from "routing-controllers";
+// Loading handlers and configuration.
 import {
   databaseHandler as db,
   stateHandler,
@@ -18,21 +17,32 @@ import {
   poweredHandler,
   timingHandler
 } from '@indigo/handlers';
-/**
- * Loading routes.
- */
+// Loading routes.
 import { Controllers } from '@indigo/api/controllers';
 import { SystemStateType } from '@indigo/types';
 import { StateManager } from './state-manager';
-
+// Loading configuration.
 const config = require('@indigo/config.json');
 
 export class Worker {
-  private app: express.Application = express();
+  private app: koa = new koa();
   @Inject
   private systemState: StateManager;
 
   public constructor() {
+    // Loading & register all application routes
+    useKoaServer(this.app, {
+      defaults: {
+        paramOptions: {
+          //with this option, argument will be required by default
+          required: false,
+        }
+      },
+      routePrefix: '/api',
+      controllers: Controllers,
+      classTransformer: false
+    });
+
     // In development mode we adding timing watcher.
     if (process.env.NODE_ENV !== 'production') {
       logger.info('Timing watch added.');
@@ -45,28 +55,19 @@ export class Worker {
       this.app.use(compression());
     }
 
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser());
+    //this.app.use(bodyParser.urlencoded({ extended: true }));
 
     // Adding handlers
     this.app.use(poweredHandler);
     this.app.use(stateHandler);
 
-    // Mount files from project/public in our site on /public
-    this.app.use('/public', express.static(path.join(__dirname,'../public')));
+    this.app.use(helmet.xssFilter());
+    this.app.use(helmet.frameguard());
+    this.app.use(helmet.noSniff());
 
-    // Loading & register all application routes
-    useExpressServer(this.app, {
-      defaults: {
-        paramOptions: {
-          //with this option, argument will be required by default
-          required: false,
-        }
-      },
-      routePrefix: '/api',
-      controllers: Controllers,
-      classTransformer: false
-    });
+    // Mount files from project/public in our site on /public
+    //this.app.use('/public', express.static(path.join(__dirname,'../public')));
 
     this.app.listen(config.api.port, async() => {
       logger.info(`Bound at port ${config.api.port}`);
@@ -79,17 +80,15 @@ export class Worker {
       await db.authenticate();
       // If we connected to database, log it
       logger.info('Database connection has been established successfully.');
-      this.systemState.go(SystemStateType.Working)
+      this.systemState.go(SystemStateType.Working);
     }
     // Else tell about error
     catch(e) {
       this.systemState.go(SystemStateType.NoDatabaseConnection);
       logger.error('Unable to connect to the database:', e.message);
       // And create retry loop
-      logger.info('We will retry in a 5 secs')
-      setTimeout(() => {
-        this.checkDatabase();
-      }, 5000);
+      logger.info('We will retry in a 5 secs');
+      setTimeout(() => this.checkDatabase(), 5000);
     };
   }
 }

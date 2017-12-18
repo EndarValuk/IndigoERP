@@ -22,7 +22,14 @@ class UsersRepository implements BaseRepository<User, string> {
             ref_object_type: 5
           }
         };
-        user.setDataValue("object_properties", await ObjectProperty.all(propertyPredicate));
+
+        try {
+          user.setDataValue("object_properties", await ObjectProperty.all(propertyPredicate));
+        }
+        catch(e) {
+          user.setDataValue("object_properties", []);
+        }
+
         result = new Envelope<User>(ResultType.Success, user);
       }
       else

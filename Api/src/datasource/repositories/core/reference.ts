@@ -1,6 +1,6 @@
 import { Provides } from "typescript-ioc";
 
-import { ReferenceQueryModel } from "@indigo/api/models";
+import { ReferenceQueryModel } from '@indigo/api/models';
 import { ICanReadRepository } from '@indigo/datasource/repositories/interfaces';
 import { Envelope, Reference } from '@indigo/datasource/models';
 import { ResultType } from '@indigo/types';
