@@ -1,6 +1,6 @@
 import { QueryModel } from "../query";
 
-export class ReferenceQueryModel extends QueryModel {
+class ReferenceQueryModel extends QueryModel {
   public Project: string = "core";
 
   public Type: string = "reference";
@@ -8,4 +8,4 @@ export class ReferenceQueryModel extends QueryModel {
   public Levels: string[];
 }
 
-export { QueryModel };
+export { ReferenceQueryModel };

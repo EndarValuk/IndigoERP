@@ -57,7 +57,7 @@ class UsersRepository implements BaseRepository<User, string> {
   public async Create(entry: User): Promise<Envelope<User>> {
     let result: Envelope<User>;
 
-    let q =  {
+    let q = {
       query: `SELECT * FROM "core"."create_user"(?,?,?,?,?)`,
       values: [
         entry.login,
