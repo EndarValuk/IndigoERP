@@ -1,0 +1,7 @@
+{
+  "postgres": {
+    "users": {
+      "create_procedure": "SELECT * FROM core.create_user(?)"
+    }
+  }
+}

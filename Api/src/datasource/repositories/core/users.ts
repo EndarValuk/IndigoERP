@@ -2,6 +2,7 @@ import { Provides } from "typescript-ioc";
 
 import { BaseRepository } from '@indigo/datasource/repositories/interfaces';
 import { User, ObjectProperty, Envelope } from '@indigo/datasource/models';
+import Queries from '@indigo/datasource/queries';
 import { ResultType } from '@indigo/types';
 
 @Provides(UsersRepository)
@@ -58,13 +59,9 @@ class UsersRepository implements BaseRepository<User, string> {
     let result: Envelope<User>;
 
     let q = {
-      query: `SELECT * FROM "core"."create_user"(?,?,?,?,?)`,
+      query: Queries.users.create_procedure,
       values: [
-        entry.login,
-        entry.name,
-        entry.patronymic,
-        entry.surname,
-        entry.password
+        JSON.stringify(entry)
       ]
     };
 
