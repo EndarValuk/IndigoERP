@@ -8,10 +8,10 @@
     "url": "https://github.com/EndarValuk/IndigoERP.git/Api"
   },
   "scripts": {
-    "start": "nodemon",
-    "restart": "npm run build:develop && npm run view:develop",
-    "build:develop": "tsc && tsc-resolve && cp src/config.json build && cp src/config-schema.json build",
-    "view:develop": "nodemon --exec node build/server.js",
+    "start": "pm2 restart process.json --no-daemon",
+    "buildAndStart": "npm run build:develop && node build/server.js",
+    "copy:config": "cp src/config.json build && cp src/queries.json build && cp src/config-schema.json build",
+    "build:develop": "tsc && tsc-resolve && npm run copy:config",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "EndarValuk",
@@ -24,7 +24,7 @@
     "@types/node": "^8.5.1",
     "@types/sequelize": "^4.0.79",
     "@types/winston": "^2.3.7",
-    "nodemon": "^1.13.2",
+    "pm2": "^2.9.1",
     "tsc-resolve": "^1.0.6",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
