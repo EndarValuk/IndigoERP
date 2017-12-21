@@ -1,5 +1,8 @@
 {
   "postgres": {
+    "objects": {
+      "execute_action_procedure": "SELECT * FROM core.execute_object_action(?,?,?,?,?)"
+    },
     "users": {
       "create_procedure": "SELECT * FROM core.create_user(?)"
     }
