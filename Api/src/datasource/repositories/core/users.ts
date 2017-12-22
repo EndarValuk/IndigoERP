@@ -1,12 +1,15 @@
 import { Provides } from "typescript-ioc";
 
-import { BaseRepository } from '@indigo/datasource/repositories/interfaces';
+import { BaseRepository } from '@indigo/datasource/repositories';
 import { User, ObjectProperty, Envelope } from '@indigo/datasource/models';
-import Queries from '@indigo/datasource/queries';
-import { ResultType } from '@indigo/types';
+import { ResultType, ObjectType } from '@indigo/types';
 
 @Provides(UsersRepository)
-class UsersRepository implements BaseRepository<User, string> {
+class UsersRepository extends BaseRepository<User, string> {
+  constructor() {
+    super(ObjectType.User);
+  }
+
   public async Read(key: string): Promise<Envelope<User>> {
     let result: Envelope<User>;
 
@@ -47,10 +50,10 @@ class UsersRepository implements BaseRepository<User, string> {
 
     try {
       let users = await User.all();
-      result = new Envelope(ResultType.Success, users);
+      result = new Envelope<User[]>(ResultType.Success, users);
     }
     catch(e) {
-      result = new Envelope(ResultType.ErrorDatabaseRead, e);
+      result = new Envelope<User[]>(ResultType.ErrorDatabaseRead, e);
     }
     return result;
   }
@@ -59,7 +62,7 @@ class UsersRepository implements BaseRepository<User, string> {
     let result: Envelope<User>;
 
     let q = {
-      query: Queries.users.create_procedure,
+      query: this.QueryManager.create_procedure,
       values: [
         JSON.stringify(entry)
       ]

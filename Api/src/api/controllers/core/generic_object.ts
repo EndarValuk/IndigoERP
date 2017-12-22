@@ -1,10 +1,10 @@
 // Loading external dependencies.
 import { Inject } from "typescript-ioc";
 import { Context } from 'koa';
-import { Controller, Post, Body, OnUndefined, Ctx } from "routing-controllers";
+import { Controller, Post, Body, OnUndefined, Ctx, Get, Param } from "routing-controllers";
 // Loading local dependencies.
 import { BaseController } from '@indigo/api/controllers/interfaces';
-import { ObjectActionQueryModel, ObjectQueryModel } from '@indigo/api/models';
+import { ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indigo/api/models';
 import { GenericObjectRepository } from '@indigo/datasource/repositories';
 
 @Controller()
@@ -24,8 +24,19 @@ export class ObjectActionController implements BaseController<GenericObjectRepos
 
   @Post("/object/logs")
   @OnUndefined(204)
-  async GetLogs(@Ctx() context: Context, @Body() entry: ObjectQueryModel): Promise<Context> {
+  async GetLogsByPost(@Ctx() context: Context, @Body() entry: QueryModel): Promise<Context> {
     context.body = await this._repository.GetLogs(entry);
+    return context;
+  }
+
+  @Get("/object/logs/:objectGuid/:objectType")
+  @OnUndefined(204)
+  async GetLogs(@Ctx() context: Context, @Param('objectGuid') objectGuid: number, @Param('objectType') objectType: number): Promise<Context> {
+    let mParams: ObjectQueryModel = new ObjectQueryModel();
+    mParams.Ref_Object = objectGuid;
+    mParams.Ref_ObjectType = objectType;
+
+    context.body = await this._repository.GetLogs(mParams);
     return context;
   }
 }
