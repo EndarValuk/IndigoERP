@@ -1,7 +1,7 @@
 class QueryModel {
-  public FieldsPredicate: string;
-  public GroupByPredicate: string;
-  public WherePredicate: string;
+  public Fields: string;
+  public GroupBy: string;
+  public Where: string;
 }
 
 export { QueryModel };

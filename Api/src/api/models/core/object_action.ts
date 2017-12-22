@@ -1,8 +1,6 @@
-class ObjectActionQueryModel {
-  public Ref_Object: number;
+import { ObjectQueryModel } from '@indigo/api/models';
 
-  public Ref_ObjectType: number;
-
+class ObjectActionQueryModel extends ObjectQueryModel {
   public Ref_Action: number;
 
   public Ref_Invoker: string;

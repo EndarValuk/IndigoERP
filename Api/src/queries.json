@@ -1,10 +1,12 @@
 {
   "postgres": {
-    "objects": {
-      "execute_action_procedure": "SELECT * FROM core.execute_object_action(?,?,?,?,?)"
-    },
-    "users": {
-      "create_procedure": "SELECT * FROM core.create_user(?)"
+    "core": {
+      "Generic": {
+        "execute_action_procedure": "SELECT * FROM core.execute_object_action(?)"
+      },
+      "User": {
+        "create_procedure": "SELECT * FROM core.create_user(?)"
+      }
     }
   }
 }

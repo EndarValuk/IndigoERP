@@ -40,7 +40,6 @@ export class Worker {
       },
       routePrefix: '/api',
       controllers: Controllers,
-      classTransformer: false
     });
 
     // In development mode we adding timing watcher.
