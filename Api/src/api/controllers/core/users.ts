@@ -3,12 +3,12 @@ import { Inject } from "typescript-ioc";
 import { Context } from 'koa';
 import { Controller, Param, Body, Get, Post, Put, Delete, Ctx } from "routing-controllers";
 // Loading local dependencies.
-import { BaseController } from '@indigo/api/controllers/interfaces';
+import { IHasRepositoryController } from '@indigo/api/controllers/interfaces';
 import { User } from '@indigo/datasource/models';
 import { UsersRepository } from '@indigo/datasource/repositories';
 
 @Controller()
-export class UsersController implements BaseController<UsersRepository> {
+export class UsersController implements IHasRepositoryController<UsersRepository> {
   @Inject
   _repository: UsersRepository;
 
