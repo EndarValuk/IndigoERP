@@ -5,7 +5,7 @@ import { User, ObjectProperty, Envelope } from '@indigo/datasource/models';
 import { ResultType, ObjectType } from '@indigo/types';
 
 @Provides(UsersRepository)
-class UsersRepository extends BaseRepository<User, string> {
+export class UsersRepository extends BaseRepository<User, string> {
   constructor() {
     super(ObjectType.User);
   }
@@ -86,5 +86,3 @@ class UsersRepository extends BaseRepository<User, string> {
     return new Envelope<boolean>(ResultType.NYI);
   }
 }
-
-export { UsersRepository };

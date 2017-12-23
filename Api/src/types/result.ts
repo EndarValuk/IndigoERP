@@ -1,5 +1,6 @@
 /**
- * Api operation result types
+ * Operation result types.
+ * Used mostly in API, to determine detailed operation results and let know client application about it.
  */
 export enum ResultType {
 //#region Base result flags

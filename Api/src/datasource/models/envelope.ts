@@ -1,6 +1,6 @@
 import { ResultType } from '@indigo/types';
 
-class Envelope<T> {
+export class Envelope<T> {
   public readonly Type: ResultType = ResultType.NoResultYet;
 
   public readonly Value?: T | Error;
@@ -45,5 +45,3 @@ class Envelope<T> {
     this.IsSuccessful = !hasError && !nyi && !nyr;
   }
 }
-
-export { Envelope };

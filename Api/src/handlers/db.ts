@@ -1,8 +1,8 @@
-/**
- * Loading dependencies.
- */
+// Loading external dependencies.
 import { Sequelize, ISequelizeConfig } from 'sequelize-typescript';
+// Loading local dependencies.
 import { logger } from './log';
+// Loading configuration.
 const settings = require('@indigo/config.json');
 
 const config: ISequelizeConfig = {

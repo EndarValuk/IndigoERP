@@ -6,7 +6,7 @@ import { Envelope, Reference } from '@indigo/datasource/models';
 import { ResultType } from '@indigo/types';
 
 @Provides(ReferenceRepository)
-class ReferenceRepository implements ICanReadRepository<any, string> {
+export class ReferenceRepository implements ICanReadRepository<any, string> {
   public async Read(key: ReferenceQueryModel): Promise<Envelope<any>> {
     let result: Envelope<any>;
 
@@ -32,5 +32,3 @@ class ReferenceRepository implements ICanReadRepository<any, string> {
     return this.Read(key);
   }
 }
-
-export { ReferenceRepository };

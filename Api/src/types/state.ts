@@ -1,4 +1,8 @@
-enum SystemStateType {
+/**
+ * Application state types.
+ * Used in state machine, to handle application-wide events, and do consequent actions.
+ */
+export enum SystemStateType {
   Idle                    = 0x0,
   Starting                = 0x1,
   CheckingLicense         = 0x2,
@@ -6,5 +10,3 @@ enum SystemStateType {
   NoDatabaseConnection    = 0x4,
   NoFilestorageConnection = 0x5,
 }
-
-export { SystemStateType }

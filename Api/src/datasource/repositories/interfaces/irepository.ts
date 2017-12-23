@@ -1,7 +1,7 @@
 import { ObjectType } from '@indigo/types';
 import { ICanCreateRepository, ICanDeleteRepository, ICanReadRepository, ICanUpdateRepository } from '@indigo/datasource/repositories/interfaces';
 
-interface IRepository<T, K> extends
+export interface IRepository<T, K> extends
   ICanCreateRepository<T>,
   ICanDeleteRepository<K>,
   ICanReadRepository<T, K>,
@@ -10,6 +10,4 @@ interface IRepository<T, K> extends
   Application: string;
 
   ObjectType: ObjectType;
- }
-
-export { IRepository };
+}

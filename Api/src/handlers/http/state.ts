@@ -5,7 +5,7 @@ import * as HttpCodes from 'http-status-codes'
 import { StateManager } from '@indigo/bin/state-manager';
 import { SystemStateType } from '@indigo/types';
 
-const stateHandler = async(ctx: Context, next: () => Promise<void>) => {
+export const stateHandler = async(ctx: Context, next: () => Promise<void>) => {
   let systemState = new StateManager();
 
   switch(systemState.currentState) {
@@ -19,5 +19,3 @@ const stateHandler = async(ctx: Context, next: () => Promise<void>) => {
     }
   }
 };
-
-export { stateHandler };

@@ -8,7 +8,7 @@ import { logger } from '@indigo/handlers';
  * @param ctx 
  * @param next 
  */
-const timingHandler = async(ctx: Context, next: () => Promise<void>) => {
+export const timingHandler = async(ctx: Context, next: () => Promise<void>) => {
   // Check start time
   let beginTime = Date.now();
   // Await for other middleware to run
@@ -19,5 +19,3 @@ const timingHandler = async(ctx: Context, next: () => Promise<void>) => {
   ctx.set('X-Response-Time', delta + 'ms');
   logger.info(`Reponse time: ${ctx.url}: ${delta}ms`);
 };
-
-export { timingHandler };

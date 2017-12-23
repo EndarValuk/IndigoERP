@@ -6,7 +6,7 @@ import { BaseRepository } from '@indigo/datasource/repositories';
 import { ResultType, ObjectType } from '@indigo/types';
 
 @Provides(GenericObjectRepository)
-class GenericObjectRepository extends BaseRepository<any, any> {
+export class GenericObjectRepository extends BaseRepository<any, any> {
   constructor() {
     super(ObjectType.Generic);
   }
@@ -43,5 +43,3 @@ class GenericObjectRepository extends BaseRepository<any, any> {
     return result;
   }
 }
-
-export { GenericObjectRepository };

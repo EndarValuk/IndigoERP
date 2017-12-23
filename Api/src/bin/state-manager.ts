@@ -7,7 +7,7 @@ import { SystemState } from './state';
 /**
  * Application state manager
  */
-class StateManager {
+export class StateManager {
   @Inject
   private _state: SystemState;
 
@@ -26,5 +26,3 @@ class StateManager {
     return this._state.currentState;
   }
 }
-
-export { StateManager };

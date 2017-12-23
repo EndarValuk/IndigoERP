@@ -1,6 +1,4 @@
-/**
- * Loading dependencies.
- */
+// Loading external dependencies.
 import * as logger from "winston";
 
 logger.configure({
