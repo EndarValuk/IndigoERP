@@ -5,7 +5,7 @@
 import { cpus } from "os";
 import * as cluster from 'cluster';
 
-import { logger } from '@indigo/handlers';
+import { logger } from '@indy/handlers';
 
 export class Master {
   public constructor() {

@@ -16,13 +16,13 @@ import {
   logger,
   poweredHandler,
   timingHandler
-} from '@indigo/handlers';
+} from '@indy/handlers';
 // Loading routes.
-import { Controllers } from '@indigo/api/controllers';
-import { SystemStateType } from '@indigo/types';
+import { Controllers } from '@indy/api/controllers';
+import { SystemStateType } from '@indy/types';
 import { StateManager } from './state-manager';
 // Loading configuration.
-const config = require('@indigo/config.json');
+const config = require('@indy/config.json');
 
 export class Worker {
   private app: koa = new koa();

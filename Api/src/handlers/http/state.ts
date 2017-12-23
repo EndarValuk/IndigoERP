@@ -2,8 +2,8 @@
 import { Context } from "koa";
 import * as HttpCodes from 'http-status-codes'
 // Loading local dependencies.
-import { StateManager } from '@indigo/bin/state-manager';
-import { SystemStateType } from '@indigo/types';
+import { StateManager } from '@indy/bin/state-manager';
+import { SystemStateType } from '@indy/types';
 
 export const stateHandler = async(ctx: Context, next: () => Promise<void>) => {
   let systemState = new StateManager();

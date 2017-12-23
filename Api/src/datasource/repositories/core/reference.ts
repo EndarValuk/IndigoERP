@@ -1,9 +1,9 @@
 import { Provides } from "typescript-ioc";
 
-import { ReferenceQueryModel } from '@indigo/api/models';
-import { ICanReadRepository } from '@indigo/datasource/repositories/interfaces';
-import { Envelope, Reference } from '@indigo/datasource/models';
-import { ResultType } from '@indigo/types';
+import { ReferenceQueryModel } from '@indy/api/models';
+import { ICanReadRepository } from '@indy/datasource/repositories/interfaces';
+import { Envelope, Reference } from '@indy/datasource/models';
+import { ResultType } from '@indy/types';
 
 @Provides(ReferenceRepository)
 export class ReferenceRepository implements ICanReadRepository<any, string> {

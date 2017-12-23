@@ -1,7 +1,7 @@
 // External dependencies
 import { Inject } from "typescript-ioc";
 // Local dependencies
-import { SystemStateType } from '@indigo/types';
+import { SystemStateType } from '@indy/types';
 import { SystemState } from './state';
 
 /**

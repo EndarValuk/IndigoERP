@@ -1,8 +1,8 @@
 // Loading configuration.
-const config = require('@indigo/config.json');
-const queries = require('@indigo/queries.json');
+const config = require('@indy/config.json');
+const queries = require('@indy/queries.json');
 // Loading local dependencies.
-import { ObjectType } from '@indigo/types';
+import { ObjectType } from '@indy/types';
 
 export default class Manager {
   public static Get(application: string, objectType: ObjectType): any {

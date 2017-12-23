@@ -1,4 +1,4 @@
-import { ResultType } from '@indigo/types';
+import { ResultType } from '@indy/types';
 
 export class Envelope<T> {
   public readonly Type: ResultType = ResultType.NoResultYet;

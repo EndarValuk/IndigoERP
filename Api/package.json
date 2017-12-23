@@ -1,11 +1,11 @@
 {
-  "name": "indigoerp-api",
+  "name": "indy-ecm-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "repository": {
     "type": "github",
-    "url": "https://github.com/EndarValuk/IndigoERP.git/Api"
+    "url": "https://github.com/EndarValuk/IndyECM.git"
   },
   "scripts": {
     "start": "pm2 restart process.json --no-daemon",

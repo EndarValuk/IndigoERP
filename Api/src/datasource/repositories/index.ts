@@ -1,9 +1,9 @@
-import { ReferenceQueryModel } from '@indigo/api/models';
-import { Envelope } from '@indigo/datasource/models';
-import { IRepository } from '@indigo/datasource/repositories/interfaces';
-import { ObjectQueryModel, QueryModel } from '@indigo/api/models';
-import Queries from '@indigo/datasource/queries';
-import { ObjectType } from '@indigo/types';
+import { ReferenceQueryModel } from '@indy/api/models';
+import { Envelope } from '@indy/datasource/models';
+import { IRepository } from '@indy/datasource/repositories/interfaces';
+import { ObjectQueryModel, QueryModel } from '@indy/api/models';
+import Queries from '@indy/datasource/queries';
+import { ObjectType } from '@indy/types';
 
 abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
   public QueryManager: any;

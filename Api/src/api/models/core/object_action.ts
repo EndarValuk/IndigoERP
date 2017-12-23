@@ -1,4 +1,4 @@
-import { ObjectQueryModel } from '@indigo/api/models';
+import { ObjectQueryModel } from '@indy/api/models';
 
 export class ObjectActionQueryModel extends ObjectQueryModel {
   public Ref_Action: number;

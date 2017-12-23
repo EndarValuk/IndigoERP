@@ -1,5 +1,5 @@
-import { ObjectType } from '@indigo/types';
-import { ICanCreateRepository, ICanDeleteRepository, ICanReadRepository, ICanUpdateRepository } from '@indigo/datasource/repositories/interfaces';
+import { ObjectType } from '@indy/types';
+import { ICanCreateRepository, ICanDeleteRepository, ICanReadRepository, ICanUpdateRepository } from '@indy/datasource/repositories/interfaces';
 
 export interface IRepository<T, K> extends
   ICanCreateRepository<T>,

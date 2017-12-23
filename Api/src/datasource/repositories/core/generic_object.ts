@@ -1,9 +1,9 @@
 import { Provides } from 'typescript-ioc';
 
-import { ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indigo/api/models';
-import { Envelope, ObjectLog } from '@indigo/datasource/models';
-import { BaseRepository } from '@indigo/datasource/repositories';
-import { ResultType, ObjectType } from '@indigo/types';
+import { ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indy/api/models';
+import { Envelope, ObjectLog } from '@indy/datasource/models';
+import { BaseRepository } from '@indy/datasource/repositories';
+import { ResultType, ObjectType } from '@indy/types';
 
 @Provides(GenericObjectRepository)
 export class GenericObjectRepository extends BaseRepository<any, any> {

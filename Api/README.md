@@ -1,2 +1,2 @@
-# IndigoERP API
+# IndyECM API
 Node.JS API backend

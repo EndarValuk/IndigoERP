@@ -1,6 +1,6 @@
 import { TypeState } from 'typestate';
 
-import { SystemStateType } from '@indigo/types';
+import { SystemStateType } from '@indy/types';
 import { Singleton } from 'typescript-ioc';
 
 @Singleton

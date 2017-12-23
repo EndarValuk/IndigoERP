@@ -1,8 +1,8 @@
 import { Provides } from "typescript-ioc";
 
-import { BaseRepository } from '@indigo/datasource/repositories';
-import { User, ObjectProperty, Envelope } from '@indigo/datasource/models';
-import { ResultType, ObjectType } from '@indigo/types';
+import { BaseRepository } from '@indy/datasource/repositories';
+import { User, ObjectProperty, Envelope } from '@indy/datasource/models';
+import { ResultType, ObjectType } from '@indy/types';
 
 @Provides(UsersRepository)
 export class UsersRepository extends BaseRepository<User, string> {
