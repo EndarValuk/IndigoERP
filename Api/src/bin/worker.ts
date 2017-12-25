@@ -86,8 +86,8 @@ export class Worker {
       this.systemState.go(SystemStateType.NoDatabaseConnection);
       logger.error('Unable to connect to the database:', e.message);
       // And create retry loop
-      logger.info('We will retry in a 5 secs');
-      setTimeout(() => this.checkDatabase(), 5000);
+      logger.info(`We will retry in a ${config.database.reconnect / 1000} secs`);
+      setTimeout(() => this.checkDatabase(), config.database.reconnect);
     };
   }
 }

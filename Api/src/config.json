@@ -13,6 +13,8 @@
     "port": 5432,
     "catalogue": "nosfera",
     "user": "postgres",
-    "password": "postgres"
+    "password": "postgres",
+
+    "reconnect": "15000"
   }
 }
