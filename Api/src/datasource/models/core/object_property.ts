@@ -15,6 +15,9 @@ export default class ObjectProperty extends Model<ObjectProperty> {
   @Column(DataType.INTEGER)
   ref_object_type: string;
 
+  @Column(DataType.INTEGER)
+  ref_type: string;
+
   @Column(DataType.TEXT)
   value: string;
 }

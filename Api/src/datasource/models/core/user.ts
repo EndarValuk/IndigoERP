@@ -10,7 +10,9 @@ import { HasMany } from 'sequelize-typescript/lib/annotations/association/HasMan
 export default class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.BIGINT)
+  @Column({ 
+    field: "guid"
+  })
   id: number;
 
   @Column(DataType.INTEGER)
