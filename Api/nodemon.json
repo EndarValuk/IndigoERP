@@ -1,0 +1,11 @@
+{
+  "delay": 2500,
+  "watch": [
+    "src"
+  ],
+  "ext": "ts",
+  "ignore": [
+    "src/**/*.spec.ts"
+  ],
+  "exec": "npm run buildAndStart"
+}
