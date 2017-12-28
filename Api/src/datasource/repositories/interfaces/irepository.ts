@@ -1,4 +1,4 @@
-import { ObjectType } from '@indy/types';
+import { ObjectType, ApplicationType } from '@indy/types';
 import { ICanCreateRepository, ICanDeleteRepository, ICanReadRepository, ICanUpdateRepository } from '@indy/datasource/repositories/interfaces';
 
 export interface IRepository<T, K> extends
@@ -7,7 +7,7 @@ export interface IRepository<T, K> extends
   ICanReadRepository<T, K>,
   ICanUpdateRepository<T> {
 
-  Application: string;
+  Application: ApplicationType;
 
   ObjectType: ObjectType;
 }

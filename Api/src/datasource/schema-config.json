@@ -2,12 +2,28 @@
   "postgres": {
     "Core": {
       "Generic": {
+        "$schema_definitions": {
+          "logs": {
+            "schema": "core",
+            "tableName": "object_logs"
+          },
+          "references": {
+            "object_status": {
+              "schema": "core",
+              "tableName": "reference_object_status"
+            }
+          },
+          "properties": {
+            "schema": "core",
+            "tableName": "object_properties"
+          }
+        },
         "execute_action_procedure": "SELECT * FROM core.execute_object_action(?)"
       }
     },
     "Anubis": {
       "User": {
-        "definition": {
+        "$schema_definitions": {
           "schema": "core",
           "tableName": "users"
         },

@@ -2,13 +2,13 @@ import { ReferenceQueryModel } from '@indy/api/models';
 import { Envelope } from '@indy/datasource/models';
 import { IRepository } from '@indy/datasource/repositories/interfaces';
 import { ObjectQueryModel, QueryModel } from '@indy/api/models';
-import Queries from '@indy/datasource/queries';
-import { ObjectType } from '@indy/types';
+import { Mapper } from '@indy/datasource';
+import { ObjectType, ApplicationType } from '@indy/types';
 
 abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
   public QueryManager: any;
 
-  public Application: string;
+  public Application: ApplicationType;
 
   public ObjectType: ObjectType;
 
@@ -54,11 +54,11 @@ abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
     return q;
   }
 
-  constructor(objectType: ObjectType, application: string = "core") {
+  constructor(objectType: ObjectType, application: ApplicationType = ApplicationType.Core) {
     this.ObjectType = objectType;
     this.Application = application;
 
-    this.QueryManager = Queries.Get(this.Application, this.ObjectType);
+    this.QueryManager = Mapper(this.Application, this.ObjectType);
   }
 
   Read(key: TK | ReferenceQueryModel): Envelope<T> | Promise<Envelope<T>> {
@@ -82,7 +82,8 @@ abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
   }
 }
 
-export * from './core/generic_object';
-export * from './core/users';
-export * from './core/reference';
 export { BaseRepository };
+export * from './core/generic_object';
+export * from './core/reference';
+
+export * from './anubis/users';
