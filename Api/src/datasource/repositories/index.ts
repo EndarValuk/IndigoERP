@@ -3,12 +3,12 @@ import { Envelope } from '@indy/datasource/models';
 import { IRepository } from '@indy/datasource/repositories/interfaces';
 import { ObjectQueryModel, QueryModel } from '@indy/api/models';
 import { Mapper } from '@indy/datasource';
-import { ObjectType, ApplicationType } from '@indy/types';
+import { ObjectType, ModuleType } from '@indy/types';
 
 abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
   public QueryManager: any;
 
-  public Application: ApplicationType;
+  public Application: ModuleType;
 
   public ObjectType: ObjectType;
 
@@ -54,7 +54,7 @@ abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
     return q;
   }
 
-  constructor(objectType: ObjectType, application: ApplicationType = ApplicationType.Core) {
+  constructor(objectType: ObjectType, application: ModuleType = ModuleType.Core) {
     this.ObjectType = objectType;
     this.Application = application;
 

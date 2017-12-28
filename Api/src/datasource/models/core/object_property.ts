@@ -1,9 +1,13 @@
+// Loading external dependencies.
 import { Table, Column, Model, DataType, PrimaryKey } from 'sequelize-typescript';
+import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
+// Loading local dependencies.
+import { ModuleType, ObjectType } from '@indy/types';
+import { Mapper } from '@indy/datasource/mapper';
+// Reading database schema mapping.
+const decoration: IDefineOptions = Mapper(ModuleType.Core, ObjectType.Generic).$schema_definitions.properties;
 
-@Table({
-  schema: "core",
-  tableName: "object_properties"
-})
+@Table(decoration)
 export default class ObjectProperty extends Model<ObjectProperty> {
   @PrimaryKey
   @Column(DataType.UUIDV4)

@@ -2,12 +2,12 @@ import { Provides } from "typescript-ioc";
 
 import { BaseRepository } from '@indy/datasource/repositories';
 import { User, ObjectProperty, Envelope } from '@indy/datasource/models';
-import { ResultType, ObjectType } from '@indy/types';
+import { ResultType, ObjectType, ModuleType } from '@indy/types';
 
 @Provides(UsersRepository)
 export class UsersRepository extends BaseRepository<User, string> {
   constructor() {
-    super(ObjectType.User);
+    super(ObjectType.User, ModuleType.Anubis);
   }
 
   public async Read(key: string): Promise<Envelope<User>> {
