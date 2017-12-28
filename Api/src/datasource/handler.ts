@@ -1,7 +1,7 @@
 // Loading external dependencies.
 import { Sequelize, ISequelizeConfig } from 'sequelize-typescript';
 // Loading local dependencies.
-import { logger } from './log';
+import { logger } from '@indy/handlers/log';
 // Loading configuration.
 const settings = require('@indy/config.json');
 
@@ -17,7 +17,10 @@ const config: ISequelizeConfig = {
   database: settings.database.catalogue,
   dialect: settings.database.type,
 
-  modelPaths: [__dirname + '/../datasource/models/core'],
+  modelPaths: [
+    __dirname + '/../datasource/models/core',
+    __dirname + '/../datasource/models/anubis',
+  ],
 
   // SQLite only
   //storage: 'path/to/database.sqlite'

@@ -11,12 +11,12 @@ import { Inject } from 'typescript-ioc';
 import { useKoaServer } from "routing-controllers";
 // Loading handlers and configuration.
 import {
-  databaseHandler as db,
   stateHandler,
   logger,
   poweredHandler,
   timingHandler
 } from '@indy/handlers';
+import { databaseHandler as db } from '@indy/datasource';
 // Loading routes.
 import { Controllers } from '@indy/api/controllers';
 import { SystemStateType } from '@indy/types';

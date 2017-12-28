@@ -1,12 +1,27 @@
 {
   "postgres": {
-    "core": {
+    "Core": {
       "Generic": {
         "execute_action_procedure": "SELECT * FROM core.execute_object_action(?)"
-      },
+      }
+    },
+    "Anubis": {
       "User": {
+        "definition": {
+          "schema": "core",
+          "tableName": "users"
+        },
         "create_procedure": "SELECT * FROM core.create_user(?)"
       }
+    },
+    "Imhotep": {
+
+    },
+    "Isida": {
+
+    },
+    "Osiris": {
+
     }
   }
 }

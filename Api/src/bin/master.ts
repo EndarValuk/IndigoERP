@@ -1,10 +1,7 @@
-/**
- * Loading dependencies.
- * Native cluster and logger.
- */
+// Native cluster and logger.
 import { cpus } from "os";
 import * as cluster from 'cluster';
-
+// Loading local dependencies.
 import { logger } from '@indy/handlers';
 
 export class Master {

@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon",
     "buildAndStart": "npm run build:develop && node build/server.js",
-    "copy:config": "cp src/config.json build && cp src/queries.json build && cp src/config-schema.json build",
+    "copy:config": "cp src/config.json build && cp src/datasource/schema-config.json build/datasource && cp src/config-schema.json build",
     "build:develop": "tsc && tsc-resolve && npm run copy:config",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -45,8 +45,8 @@
     "reflect-metadata": "^0.1.10",
     "routing-controllers": "^0.7.6",
     "sequelize": "^4.28.6",
-    "sequelize-typescript": "^0.6.1",
-    "tedious": "^2.1.5",
+    "sequelize-typescript": "^0.6.2",
+    "tedious": "^2.2.3",
     "typescript-ioc": "^1.0.2",
     "typestate": "^1.0.5",
     "winston": "^2.4.0"
