@@ -1,7 +1,9 @@
+// Loading external dependencies.
 import { Provides } from "typescript-ioc";
-
-import { BaseRepository } from '@indy/datasource/repositories';
+// Loading local dependencies.
+import { QueryBuildHandler } from '@indy/datasource/handlers';
 import { User, ObjectProperty, Envelope } from '@indy/datasource/models';
+import { BaseRepository } from '@indy/datasource/repositories';
 import { ResultType, ObjectType, ModuleType } from '@indy/types';
 
 @Provides(UsersRepository)
@@ -20,15 +22,8 @@ export class UsersRepository extends BaseRepository<User, string> {
     try {
       let user = await User.findOne(predicate);
       if(user) {
-        let propertyPredicate = {
-          where: {
-            ref_object: user.id,
-            ref_object_type: 5
-          }
-        };
-
         try {
-          user.setDataValue("object_properties", await ObjectProperty.all(propertyPredicate));
+          user.setDataValue("object_properties", await ObjectProperty.all(QueryBuildHandler.GetOrmObjectWhereQuery(user.id, this.ObjectType)));
         }
         catch(e) {
           user.setDataValue("object_properties", []);

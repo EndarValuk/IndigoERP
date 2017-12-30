@@ -1,6 +1,8 @@
+// Loading external dependencies.
 import { Provides } from 'typescript-ioc';
-
+// Loading local dependencies.
 import { ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indy/api/models';
+import { QueryBuildHandler } from '@indy/datasource/handlers';
 import { Envelope, ObjectLog } from '@indy/datasource/models';
 import { BaseRepository } from '@indy/datasource/repositories';
 import { ResultType, ObjectType } from '@indy/types';
@@ -34,7 +36,8 @@ export class GenericObjectRepository extends BaseRepository<any, any> {
     let result: Envelope<ObjectLog[]>;
 
     try {
-      let data = await ObjectLog.findAll(this.QueryHelper(entry));
+      let q = QueryBuildHandler.GetOrmQuery(entry);
+      let data = await ObjectLog.findAll(q);
       result = new Envelope<ObjectLog[]>(ResultType.Success, data);
     }
     catch(e) {

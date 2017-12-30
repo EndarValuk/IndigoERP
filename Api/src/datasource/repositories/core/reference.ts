@@ -1,8 +1,11 @@
+// Loading external dependencies.
 import { Provides } from "typescript-ioc";
-
+// Loading local dependencies.
 import { ReferenceQueryModel } from '@indy/api/models';
+import { databaseHandler } from '@indy/datasource';
+import { QueryBuildHandler } from '@indy/datasource/handlers';
+import { Envelope } from '@indy/datasource/models';
 import { ICanReadRepository } from '@indy/datasource/repositories/interfaces';
-import { Envelope, Reference } from '@indy/datasource/models';
 import { ResultType } from '@indy/types';
 
 @Provides(ReferenceRepository)
@@ -11,15 +14,8 @@ export class ReferenceRepository implements ICanReadRepository<any, string> {
     let result: Envelope<any>;
 
     try {
-      let table = `${key.Type}`;
-
-      if(key.Levels) {
-        key.Levels.forEach(element => {
-          table += `_${element}`;
-        });
-      }
-      let q = `SELECT * FROM "${key.Project}"."${table}"`;
-      let data = await Reference.sequelize.query(q).all();
+      let q = QueryBuildHandler.GetReferenceSelectQuery(key);
+      let data = await databaseHandler.query(q).all();
       result = new Envelope(ResultType.Success, data[0]);
     }
     catch(e) {

@@ -3,9 +3,10 @@ import { Table, Column, Model, DataType, PrimaryKey } from 'sequelize-typescript
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
 // Loading local dependencies.
 import { ModuleType, ObjectType } from '@indy/types';
-import { Mapper } from '@indy/datasource/mapper';
+import { SchemaMappingHandler } from '@indy/datasource/handlers';
+
 // Reading database schema mapping.
-const decoration: IDefineOptions = Mapper(ModuleType.Core, ObjectType.Generic).$schema_definitions.logs;
+const decoration: IDefineOptions = SchemaMappingHandler.GetObjectConfig(ModuleType.Core, ObjectType.Generic).$schema_definitions.logs;
 
 @Table(decoration)
 export default class ObjectLog extends Model<ObjectLog> {

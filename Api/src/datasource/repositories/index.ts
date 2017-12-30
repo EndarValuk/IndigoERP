@@ -1,8 +1,7 @@
 import { ReferenceQueryModel } from '@indy/api/models';
 import { Envelope } from '@indy/datasource/models';
 import { IRepository } from '@indy/datasource/repositories/interfaces';
-import { ObjectQueryModel, QueryModel } from '@indy/api/models';
-import { Mapper } from '@indy/datasource';
+import { SchemaMappingHandler } from '@indy/datasource/handlers';
 import { ObjectType, ModuleType } from '@indy/types';
 
 abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
@@ -12,53 +11,11 @@ abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
 
   public ObjectType: ObjectType;
 
-  public QueryHelper(entry?: ObjectQueryModel | QueryModel): any {
-    let q: any;
-
-    if(entry && entry instanceof QueryModel) {
-      q = {
-        attributes: [''],
-        group: [''],
-        where: {}
-      };
-
-      if(entry.Fields) {
-        q.attributes = entry.Fields.toLowerCase().split(',');
-      }
-      else
-        delete q.attributes;
-
-      if(entry.GroupBy) {
-        q.group = entry.GroupBy.toLowerCase().split(',');
-      }
-      else
-        delete q.group;
-
-      if(entry.Where) {
-        q.where = JSON.parse(JSON.stringify(entry.Where));
-      }
-      else
-        delete q.where;
-    }
-    else if(entry && entry instanceof ObjectQueryModel) {
-      q = {
-        where: {
-          ref_object: entry.Ref_Object,
-          ref_object_type: entry.Ref_ObjectType
-        }
-      };
-    }
-    else {
-      q = null;
-    }
-    return q;
-  }
-
   constructor(objectType: ObjectType, application: ModuleType = ModuleType.Core) {
     this.ObjectType = objectType;
     this.Application = application;
 
-    this.QueryManager = Mapper(this.Application, this.ObjectType);
+    this.QueryManager = SchemaMappingHandler.GetObjectConfig(this.Application, this.ObjectType);
   }
 
   Read(key: TK | ReferenceQueryModel): Envelope<T> | Promise<Envelope<T>> {

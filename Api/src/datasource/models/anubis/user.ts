@@ -3,10 +3,11 @@ import { Table, DefaultScope, Column, Model, DataType, PrimaryKey, AutoIncrement
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
 // Loading local dependencies.
 import { ModuleType, ObjectType } from '@indy/types';
-import { Mapper } from '@indy/datasource/mapper';
+import { SchemaMappingHandler } from '@indy/datasource/handlers';
 import { ObjectProperty } from '../core';
+
 // Reading database schema mapping.
-const decoration: IDefineOptions = Mapper(ModuleType.Anubis, ObjectType.User).$schema_definitions;
+const decoration: IDefineOptions = SchemaMappingHandler.GetObjectConfig(ModuleType.Anubis, ObjectType.User).$schema_definitions;
 
 @Table(decoration)
 @DefaultScope({
@@ -29,16 +30,25 @@ export default class User extends Model<User> {
   @Column(DataType.STRING(50))
   login: string;
 
-  @Column(DataType.STRING(255))
+  @Column({
+    type: DataType.STRING(255),
+    field: "name"
+  })
   name: string;
 
   @Column(DataType.TEXT)
   password: string;
 
-  @Column(DataType.STRING(255))
+  @Column({
+    type: DataType.STRING(255),
+    field: "patronymic"
+  })
   patronymic: string;
 
-  @Column(DataType.STRING(255))
+  @Column({
+    type: DataType.STRING(255),
+    field: "surname"
+  })
   surname: string;
 
   @Column(DataType.BIGINT)
@@ -47,7 +57,10 @@ export default class User extends Model<User> {
   @Column(DataType.DATE)
   lastchange_timestamp: Date;
 
-  @Column(DataType.DATE)
+  @Column({
+    type: DataType.DATE,
+    field: "create_timestamp"
+  })
   create_timestamp: Date;
 
   @HasMany(() => ObjectProperty, "ref_object")

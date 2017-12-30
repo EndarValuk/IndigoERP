@@ -3,9 +3,10 @@ import { Table, Column, Model, DataType, PrimaryKey } from 'sequelize-typescript
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
 // Loading local dependencies.
 import { ModuleType, ObjectType } from '@indy/types';
-import { Mapper } from '@indy/datasource/mapper';
+import { SchemaMappingHandler } from '@indy/datasource/handlers';
+
 // Reading database schema mapping.
-const decoration: IDefineOptions = Mapper(ModuleType.Core, ObjectType.Generic).$schema_definitions.properties;
+const decoration: IDefineOptions = SchemaMappingHandler.GetObjectConfig(ModuleType.Core, ObjectType.Generic).$schema_definitions.properties;
 
 @Table(decoration)
 export default class ObjectProperty extends Model<ObjectProperty> {
@@ -17,7 +18,7 @@ export default class ObjectProperty extends Model<ObjectProperty> {
   ref_object: number;
 
   @Column(DataType.INTEGER)
-  ref_object_type: string;
+  ref_objecttype: string;
 
   @Column(DataType.INTEGER)
   ref_type: string;

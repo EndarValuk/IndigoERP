@@ -1,5 +1,9 @@
 {
   "postgres": {
+    "$schema_delimiter": {
+      "begin": "\"",
+      "end": "\""
+    },
     "Core": {
       "Generic": {
         "$schema_definitions": {
@@ -38,6 +42,40 @@
     },
     "Osiris": {
 
+    }
+  },
+  "mssql": {
+    "$schema_delimiter": {
+      "begin": "[",
+      "end": "]"
+    },
+    "Core": {
+      "Generic": {
+        "$schema_definitions":{
+          "logs": {
+            "schema": "core",
+            "tableName": "object_logs"
+          },
+          "references": {
+            "object_status": {
+              "schema": "dbo",
+              "tableName": "reference.objectstatus"
+            }
+          },
+          "properties": {
+            "schema": "dbo",
+            "tableName": "metastorage.object.property"
+          }
+        }
+      }
+    },
+    "Anubis": {
+      "User": {
+        "$schema_definitions": {
+          "schema": "dbo",
+          "tableName": "system.users"
+        }
+      }
     }
   }
 }
