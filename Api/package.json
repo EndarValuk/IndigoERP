@@ -2,7 +2,7 @@
   "name": "indy-ecm-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/server.js",
   "repository": {
     "type": "github",
     "url": "https://github.com/EndarValuk/IndyECM.git"
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon",
     "buildAndStart": "npm run build:develop && node build/server.js",
-    "copy:config": "cp src/config.json build && cp src/datasource/schema-config.json build/datasource && cp src/config-schema.json build",
+    "copy:config": "cpx src/config.json build && cpx src/datasource/schema-config.json build/datasource && cpx src/config-schema.json build",
     "build:develop": "tsc && tsc-resolve && npm run copy:config",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
     "@types/koa": "^2.0.43",
     "@types/koa-bodyparser": "^3.0.26",
     "@types/koa-compress": "^2.0.8",
+    "@types/koa-helmet": "^3.1.2",
     "@types/koa-router": "^7.0.27",
     "@types/node": "^8.5.1",
     "@types/sequelize": "^4.0.79",
