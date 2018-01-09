@@ -1,5 +1,5 @@
 /**
- * Application types
+ * Application modules
  */
 export enum ModuleType {
   /**

@@ -1,0 +1,23 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# IDE - VSCode
+/.vscode
+
+# build output
+/build
+*.d.ts
+*.js
+*.js.map
+
+# misc
+npm-debug.log
+package-lock.json
+yarn.lock
+yarn-error.log
+
+# System Files
+.DS_Store
+Thumbs.db
