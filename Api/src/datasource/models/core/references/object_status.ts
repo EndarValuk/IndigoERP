@@ -2,9 +2,9 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
 // Loading local dependencies.
-import { SchemaMappingHandler } from '@indy/datasource/handlers';
-import { IReference } from '@indy/datasource/models/interfaces';
-import { ModuleType, ObjectType } from '@indy/types';
+import { ModuleType, ObjectType } from '@indyecm/defs/types';
+import { SchemaMappingHandler } from '@indyecm/api/datasource/handlers';
+import { IReference } from '@indyecm/api/datasource/models/interfaces';
 
 // Reading database schema mapping.
 const decoration: IDefineOptions = SchemaMappingHandler.GetObjectConfig(ModuleType.Core, ObjectType.Generic).$schema_definitions.references.object_status;

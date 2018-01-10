@@ -1,12 +1,12 @@
 // Loading external dependencies.
 import { Inject } from "typescript-ioc";
 import { Context } from 'koa';
-import { Controller, Post, Body, OnUndefined, Ctx, Params, Get } from "routing-controllers";
+import { Controller, Post, Body, OnUndefined, Ctx, Params, Get } from 'routing-controllers';
 // Loading local dependencies.
-import { IHasRepositoryController } from '@indy/api/controllers/interfaces';
-import { ReferenceQueryModel } from '@indy/api/models';
-import { ReferenceRepository } from '@indy/datasource/repositories';
-import { ModuleType } from '@indy/types';
+import { ModuleType } from '@indyecm/defs/types';
+import { IHasRepositoryController } from '@indyecm/defs/interfaces';
+import { ReferenceQueryModel } from '@indyecm/api/api/models';
+import { ReferenceRepository } from '@indyecm/api/datasource/repositories';
 
 @Controller()
 export class ReferenceController implements IHasRepositoryController<ReferenceRepository> {

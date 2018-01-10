@@ -1,12 +1,12 @@
 // Loading external dependencies.
 import { Provides } from "typescript-ioc";
 // Loading local dependencies.
-import { ReferenceQueryModel } from '@indy/api/models';
-import { databaseHandler } from '@indy/datasource';
-import { QueryBuildHandler } from '@indy/datasource/handlers';
-import { Envelope } from '@indy/datasource/models';
-import { ICanReadRepository } from '@indy/datasource/repositories/interfaces';
-import { ResultType } from '@indy/types';
+import { ICanReadRepository } from '@indyecm/defs/interfaces';
+import { Envelope } from '@indyecm/defs/models';
+import { ResultType } from '@indyecm/defs/types';
+import { ReferenceQueryModel } from '@indyecm/api/api/models';
+import { databaseHandler } from '@indyecm/api/datasource';
+import { QueryBuildHandler } from '@indyecm/api/datasource/handlers';
 
 @Provides(ReferenceRepository)
 export class ReferenceRepository implements ICanReadRepository<any, string> {

@@ -1,7 +1,7 @@
 // Loading external dependencies.
 import { Context } from "koa";
 // Loading local dependencies.
-import { logger } from '@indy/handlers';
+import { logger } from '@indyecm/api/handlers';
 
 /**
  * 

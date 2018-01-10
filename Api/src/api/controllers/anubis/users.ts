@@ -1,11 +1,12 @@
 // Loading external dependencies.
 import { Inject } from "typescript-ioc";
 import { Context } from 'koa';
-import { Controller, Param, Body, Get, Post, Put, Delete, Ctx } from "routing-controllers";
+import { Controller, Param, Body, Get, Post, Put, Delete, Ctx } from 'routing-controllers';
 // Loading local dependencies.
-import { IHasRepositoryController } from '@indy/api/controllers/interfaces';
-import { User } from '@indy/datasource/models';
-import { UsersRepository } from '@indy/datasource/repositories';
+import { IHasRepositoryController } from '@indyecm/defs/interfaces';
+import { QueryModel } from '@indyecm/defs/models';
+import { User } from '@indyecm/api/datasource/models';
+import { UsersRepository } from '@indyecm/api/datasource/repositories';
 
 @Controller()
 export class UsersController implements IHasRepositoryController<UsersRepository> {
@@ -15,7 +16,7 @@ export class UsersController implements IHasRepositoryController<UsersRepository
   /**
    * Reading user by login
    */
-  @Get("/users/:login")
+  @Get("/user/:login")
   async Read(@Ctx() context: Context, @Param("login") login: string): Promise<Context> {
     context.body = await this._repository.Read(login);
     return context;
@@ -31,9 +32,18 @@ export class UsersController implements IHasRepositoryController<UsersRepository
   }
 
   /**
+   * Reading all users
+   */
+  @Post("/Users")
+  async ReadAllPost(@Ctx() context: Context, @Body() entry: QueryModel): Promise<Context> {
+    context.body = await this._repository.ReadAll(entry);
+    return context;
+  }
+
+  /**
    * Creating user
    */
-  @Post("/users")
+  @Post("/user")
   async Create(@Ctx() context: Context, @Body() entry: User): Promise<Context> {
     context.body = await this._repository.Create(entry);
     return context;
@@ -44,7 +54,7 @@ export class UsersController implements IHasRepositoryController<UsersRepository
    * @param id User login
    * @param entry User object
    */
-  @Put("/users/:id")
+  @Put("/user/:id")
   async Update(@Ctx() context: Context, @Param("id") id: string, @Body() entry: any): Promise<Context> {
     context.body = await this._repository.Update(entry);
     return context;
@@ -54,7 +64,7 @@ export class UsersController implements IHasRepositoryController<UsersRepository
    * Deleting user
    * @param id User login
    */
-  @Delete("/users/:id")
+  @Delete("/user/:id")
   async Delete(@Ctx() context: Context, @Param("id") id: string): Promise<Context> {
     context.body = await this._repository.Delete(id);
     return context;

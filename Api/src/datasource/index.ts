@@ -1,9 +1,9 @@
 // Loading external dependencies.
 import { Sequelize, ISequelizeConfig } from 'sequelize-typescript';
 // Loading local dependencies.
-import { logger } from '@indy/handlers/log';
+import { logger } from '@indyecm/api/handlers/log';
 // Loading configuration.
-const settings = require('@indy/config.json');
+const settings = require('@indyecm/api/config.json');
 
 const config: ISequelizeConfig = {
   logging: (e: any) => {

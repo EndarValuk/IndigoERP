@@ -1,10 +1,16 @@
 // Loading external dependencies.
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
 // Loading local dependencies.
-import { ObjectType } from '@indy/types';
-import { ObjectQueryModel, QueryModel, ReferenceQueryModel } from '@indy/api/models';
+import { ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
+import { ObjectType } from '@indyecm/defs/types';
+
+import { ReferenceQueryModel } from '@indyecm/api/api/models';
 import { SchemaMappingHandler } from './schema_mapping';
 
+/**
+ * Helper class for generating queries against datasource.
+ * Useful for generic queries and transforming HTTP requests to SQL queries.
+ */
 export class QueryBuildHandler {
 
 //#region Static methods used for query generation
@@ -19,8 +25,12 @@ export class QueryBuildHandler {
         where: {}
       };
 
-      if(entry.Fields) {
-        q.attributes = entry.Fields.toLowerCase().split(',');
+      if(entry.FieldsPredicate) {
+        q.attributes = [];
+        let fieldsArray = entry.FieldsPredicate.toLowerCase().split(',');
+        for(let field in fieldsArray) {
+          q.attributes.push(fieldsArray[field].toLowerCase().trim());
+        }
       }
       else
         delete q.attributes;
@@ -31,8 +41,8 @@ export class QueryBuildHandler {
       else
         delete q.group;
 
-      if(entry.Where) {
-        q.where = JSON.parse(JSON.stringify(entry.Where));
+      if(entry.WherePredicate) {
+        q.where = JSON.parse(JSON.stringify(entry.WherePredicate));
       }
       else
         delete q.where;
@@ -84,10 +94,10 @@ export class QueryBuildHandler {
       queryTemplate += "DISTINCT";
     }
     // Проверяем, задано ли условие ограничения по набору столбцов
-    queryTemplate += request.Fields || "*";
+    queryTemplate += request.FieldsPredicate || "*";
     queryTemplate += ` FROM ${table} `;
     // Проверяем, задано ли условие ограничения по значениям
-    queryTemplate += request.Where || "";
+    queryTemplate += request.WherePredicate || "";
     // Проверяем, заданы ли настройки пропуска количества строк
     if(request.Skip != 0 || request.Take !=0)
     {

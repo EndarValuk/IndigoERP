@@ -2,7 +2,7 @@
 import { cpus } from "os";
 import * as cluster from 'cluster';
 // Loading local dependencies.
-import { logger } from '@indy/handlers';
+import { logger } from '@indyecm/api/handlers';
 
 export class Master {
   public constructor() {

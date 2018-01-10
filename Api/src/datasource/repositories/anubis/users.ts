@@ -1,10 +1,12 @@
 // Loading external dependencies.
 import { Provides } from "typescript-ioc";
 // Loading local dependencies.
-import { QueryBuildHandler } from '@indy/datasource/handlers';
-import { User, ObjectProperty, Envelope } from '@indy/datasource/models';
-import { BaseRepository } from '@indy/datasource/repositories';
-import { ResultType, ObjectType, ModuleType } from '@indy/types';
+import { Envelope, QueryModel } from '@indyecm/defs/models';
+import { ResultType, ObjectType, ModuleType } from '@indyecm/defs/types';
+
+import { QueryBuildHandler } from '@indyecm/api/datasource/handlers';
+import { User, ObjectProperty } from '@indyecm/api/datasource/models';
+import { BaseRepository } from '@indyecm/api/datasource/repositories';
 
 @Provides(UsersRepository)
 export class UsersRepository extends BaseRepository<User, string> {
@@ -40,11 +42,18 @@ export class UsersRepository extends BaseRepository<User, string> {
     return result;
   }
 
-  public async ReadAll(): Promise<Envelope<User[]>> {
+  public async ReadAll(key?: QueryModel): Promise<Envelope<User[]>> {
     let result: Envelope<User[]>;
+    let users: User[];
 
     try {
-      let users = await User.all();
+      if(key) {
+        let q = QueryBuildHandler.GetOrmQuery(key);
+        users = await User.findAll(q);
+      }
+      else
+        users = await User.all();
+
       result = new Envelope<User[]>(ResultType.Success, users);
     }
     catch(e) {

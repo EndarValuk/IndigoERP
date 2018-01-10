@@ -2,8 +2,8 @@
 import { Context } from "koa";
 import * as HttpCodes from 'http-status-codes'
 // Loading local dependencies.
-import { StateManager } from '@indy/bin/state-manager';
-import { SystemStateType } from '@indy/types';
+import { SystemStateType } from '@indyecm/defs/types';
+import { StateManager } from '@indyecm/api/bin/state-manager';
 
 export const stateHandler = async(ctx: Context, next: () => Promise<void>) => {
   let systemState = new StateManager();

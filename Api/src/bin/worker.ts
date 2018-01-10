@@ -1,28 +1,26 @@
 /**
  * Loading dependencies.
  */
-//import * as path from 'path';
-
 import * as koa from 'koa';
 import * as bodyParser from "koa-bodyparser";
 import * as compression from 'koa-compress';
 import * as helmet from 'koa-helmet';
 import { Inject } from 'typescript-ioc';
-import { useKoaServer } from "routing-controllers";
+import { useKoaServer } from 'routing-controllers';
 // Loading handlers and configuration.
 import {
   stateHandler,
   logger,
   poweredHandler,
   timingHandler
-} from '@indy/handlers';
-import { databaseHandler as db } from '@indy/datasource';
+} from '@indyecm/api/handlers';
+import { databaseHandler as db } from '@indyecm/api/datasource';
 // Loading routes.
-import { Controllers } from '@indy/api/controllers';
-import { SystemStateType } from '@indy/types';
+import { SystemStateType } from '@indyecm/defs/types';
+import { Controllers } from '@indyecm/api/api/controllers';
 import { StateManager } from './state-manager';
 // Loading configuration.
-const config = require('@indy/config.json');
+const config = require('@indyecm/api/config.json');
 
 export class Worker {
   private app: koa = new koa();
@@ -32,6 +30,9 @@ export class Worker {
   public constructor() {
     // Loading & register all application routes
     useKoaServer(this.app, {
+      cors: {
+        credentials: true,
+      },
       defaults: {
         paramOptions: {
           //with this option, argument will be required by default

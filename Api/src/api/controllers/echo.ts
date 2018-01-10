@@ -1,5 +1,5 @@
 // Loading external dependencies.
-import { Controller, Body, Post } from "routing-controllers";
+import { Controller, Body, Post } from 'routing-controllers';
 
 @Controller()
 export class EchoController {

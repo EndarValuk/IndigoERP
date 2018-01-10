@@ -1,9 +1,9 @@
 // Loading configuration.
-const config = require('@indy/config.json');
-const databaseDefinition = require('@indy/datasource/schema-config.json');
+const config = require('@indyecm/api/config.json');
+const databaseDefinition = require('@indyecm/api/datasource/schema-config.json');
 // Loading local dependencies.
-import { ModuleType, ObjectType } from '@indy/types';
-import { logger } from '@indy/handlers'
+import { ModuleType, ObjectType } from '@indyecm/defs/types';
+import { logger } from '@indyecm/api/handlers'
 
 export class SchemaMappingHandler {
   public static GetDatabaseConfig(): any {

@@ -2,8 +2,8 @@
 import { Table, DefaultScope, Column, Model, DataType, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
 // Loading local dependencies.
-import { ModuleType, ObjectType } from '@indy/types';
-import { SchemaMappingHandler } from '@indy/datasource/handlers';
+import { ModuleType, ObjectType } from '@indyecm/defs/types';
+import { SchemaMappingHandler } from '@indyecm/api/datasource/handlers';
 import { ObjectProperty } from '../core';
 
 // Reading database schema mapping.

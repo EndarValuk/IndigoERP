@@ -6,7 +6,7 @@ import { Inject } from 'typescript-ioc';
 // Local dependencies
 import { Master } from './bin/master';
 import { Worker } from './bin/worker';
-import { SystemStateType } from '@indy/types';
+import { SystemStateType } from '@indyecm/defs/types';
 import { StateManager } from './bin/state-manager';
 
 /**

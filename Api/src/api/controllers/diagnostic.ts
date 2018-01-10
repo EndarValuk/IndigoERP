@@ -1,5 +1,5 @@
 import * as os from "os";
-import { Controller, Get } from "routing-controllers";
+import { Controller, Get } from 'routing-controllers';
 
 @Controller()
 export class DiagnosticController {

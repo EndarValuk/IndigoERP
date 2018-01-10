@@ -1,11 +1,12 @@
 // Loading external dependencies.
 import { Provides } from 'typescript-ioc';
 // Loading local dependencies.
-import { ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indy/api/models';
-import { QueryBuildHandler } from '@indy/datasource/handlers';
-import { Envelope, ObjectLog } from '@indy/datasource/models';
-import { BaseRepository } from '@indy/datasource/repositories';
-import { ResultType, ObjectType } from '@indy/types';
+import { ResultType, ObjectType } from '@indyecm/defs/types';
+import { Envelope, ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
+import { ObjectActionQueryModel,  } from '@indyecm/api/api/models';
+import { QueryBuildHandler } from '@indyecm/api/datasource/handlers';
+import { ObjectLog } from '@indyecm/api/datasource/models';
+import { BaseRepository } from '@indyecm/api/datasource/repositories';
 
 @Provides(GenericObjectRepository)
 export class GenericObjectRepository extends BaseRepository<any, any> {

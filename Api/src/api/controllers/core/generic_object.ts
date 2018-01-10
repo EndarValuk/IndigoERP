@@ -1,11 +1,13 @@
 // Loading external dependencies.
 import { Inject } from "typescript-ioc";
 import { Context } from 'koa';
-import { Controller, Post, Body, OnUndefined, Ctx, Get, Param } from "routing-controllers";
+import { Controller, Post, Body, OnUndefined, Ctx, Get, Param } from 'routing-controllers';
 // Loading local dependencies.
-import { IHasRepositoryController } from '@indy/api/controllers/interfaces';
-import { ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indy/api/models';
-import { GenericObjectRepository } from '@indy/datasource/repositories';
+import { IHasRepositoryController } from '@indyecm/defs/interfaces';
+import { ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
+
+import { ObjectActionQueryModel } from '@indyecm/api/api/models';
+import { GenericObjectRepository } from '@indyecm/api/datasource/repositories';
 
 @Controller()
 export class ObjectActionController implements IHasRepositoryController<GenericObjectRepository> {

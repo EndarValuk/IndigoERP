@@ -1,8 +1,9 @@
-import { ReferenceQueryModel } from '@indy/api/models';
-import { Envelope } from '@indy/datasource/models';
-import { IRepository } from '@indy/datasource/repositories/interfaces';
-import { SchemaMappingHandler } from '@indy/datasource/handlers';
-import { ObjectType, ModuleType } from '@indy/types';
+// Loading local dependencies.
+import { IRepository } from '@indyecm/defs/interfaces';
+import { Envelope, ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
+import { ObjectType, ModuleType } from '@indyecm/defs/types';
+
+import { SchemaMappingHandler } from '@indyecm/api/datasource/handlers';
 
 abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
   public QueryManager: any;
@@ -18,11 +19,11 @@ abstract class BaseRepository<T, TK> implements IRepository<T, TK> {
     this.QueryManager = SchemaMappingHandler.GetObjectConfig(this.Application, this.ObjectType);
   }
 
-  Read(key: TK | ReferenceQueryModel): Envelope<T> | Promise<Envelope<T>> {
+  Read(key: TK | QueryModel): Envelope<T> | Promise<Envelope<T>> {
     throw new Error("Method not implemented.");
   }
 
-  ReadAll(): Envelope<T[]> | Promise<Envelope<T[]>> {
+  ReadAll(key?: ObjectQueryModel | QueryModel): Envelope<T[]> | Promise<Envelope<T[]>> {
     throw new Error("Method not implemented.");
   }
 
