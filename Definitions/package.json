@@ -1,18 +1,20 @@
 {
   "name": "@indyecm/defs",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "IndyECM definitions, enumerations, etc",
-  "main": "buyild/index.js",
-  "types": "build/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "repository": "https://github.com/EndarValuk/IndyECM.git",
   "scripts": {
-    "prepublish": "yarn run build",
-    "build": "tsc"
+    "compile": "tsc",
+    "prepublish": "yarn run compile && cpx package.json build && cpx README.md build",
+    "build": "yarn run prepublish"
   },
   "author": "EndarValuk",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "cpx": "^1.5.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
   },
