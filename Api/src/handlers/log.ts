@@ -1,14 +1,14 @@
 // Loading external dependencies.
-import * as logger from "winston";
+import * as logger from 'winston';
 
 logger.configure({
-  //level: 'debug',
+  // level: 'debug',
   transports: [
     new logger.transports.Console({
       colorize: true,
-      timestamp: true
-    })
-  ]
+      timestamp: true,
+    }),
+  ],
 });
 
 export { logger };

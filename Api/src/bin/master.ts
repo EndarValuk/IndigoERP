@@ -1,6 +1,7 @@
 // Native cluster and logger.
-import { cpus } from "os";
 import * as cluster from 'cluster';
+import { cpus } from 'os';
+
 // Loading local dependencies.
 import { logger } from '@indyecm/api/handlers';
 

@@ -1,11 +1,13 @@
+// Loading external dependencies.
+import { Singleton } from 'typescript-ioc';
 import { TypeState } from 'typestate';
 
+// Loading local dependencies.
 import { SystemStateType } from '@indyecm/defs/types';
-import { Singleton } from 'typescript-ioc';
 
 @Singleton
-export class SystemState extends TypeState.FiniteStateMachine<SystemStateType>{
-  constructor() {
+export class SystemState extends TypeState.FiniteStateMachine<SystemStateType> {
+  public constructor() {
     super(SystemStateType.Idle);
     // Configuring possible state transitions
     this.from(SystemStateType.Idle).to(SystemStateType.Starting);

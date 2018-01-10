@@ -1,28 +1,33 @@
-// External dependencies
-import { Inject } from "typescript-ioc";
-// Local dependencies
+// Loading external dependencies.
+import { Inject } from 'typescript-ioc';
+
+// Loading local dependencies.
 import { SystemStateType } from '@indyecm/defs/types';
+
 import { SystemState } from './state';
 
 /**
  * Application state manager
  */
 export class StateManager {
+  /**
+   * Application state singleton.
+   */
   @Inject
-  private _state: SystemState;
+  private state: SystemState;
 
   /**
    * Changing current state of the appliation
    * @param newState new state where we go
    */
   public go(newState: SystemStateType): void {
-    this._state.go(newState);
+    this.state.go(newState);
   }
 
   /**
    * Current application state
    */
   public get currentState(): SystemStateType {
-    return this._state.currentState;
+    return this.state.currentState;
   }
 }

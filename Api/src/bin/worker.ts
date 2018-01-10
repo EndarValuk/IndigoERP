@@ -2,11 +2,12 @@
  * Loading dependencies.
  */
 import * as koa from 'koa';
-import * as bodyParser from "koa-bodyparser";
+import * as bodyParser from 'koa-bodyparser';
 import * as compression from 'koa-compress';
 import * as helmet from 'koa-helmet';
 import { Inject } from 'typescript-ioc';
 import { useKoaServer } from 'routing-controllers';
+
 // Loading handlers and configuration.
 import {
   stateHandler,
@@ -30,21 +31,21 @@ export class Worker {
   public constructor() {
     // Loading & register all application routes
     useKoaServer(this.app, {
+      controllers: Controllers,
       cors: {
         credentials: true,
       },
       defaults: {
         paramOptions: {
-          //with this option, argument will be required by default
+          // with this option, argument will be required by default
           required: false,
-        }
+        },
       },
       routePrefix: '/api',
-      controllers: Controllers,
     });
 
     // In development mode we adding timing watcher.
-    if (process.env.NODE_ENV !== 'production') {
+    if(process.env.NODE_ENV !== 'production') {
       logger.info('Timing watch added.');
       this.app.use(timingHandler);
     }
@@ -56,7 +57,7 @@ export class Worker {
     }
 
     this.app.use(bodyParser());
-    //this.app.use(bodyParser.urlencoded({ extended: true }));
+    // this.app.use(bodyParser.urlencoded({ extended: true }));
 
     // Adding handlers
     this.app.use(poweredHandler);
@@ -67,7 +68,7 @@ export class Worker {
     this.app.use(helmet.noSniff());
 
     // Mount files from project/public in our site on /public
-    //this.app.use('/public', express.static(path.join(__dirname,'../public')));
+    // this.app.use('/public', express.static(path.join(__dirname,'../public')));
 
     this.app.listen(config.api.port, async() => {
       logger.info(`Bound at port ${config.api.port}`);
@@ -89,6 +90,6 @@ export class Worker {
       // And create retry loop
       logger.info(`We will retry in a ${config.database.reconnect / 1000} secs`);
       setTimeout(() => this.checkDatabase(), config.database.reconnect);
-    };
+    }
   }
 }
