@@ -1,4 +1,4 @@
-import { ResultType } from '@indy/types';
+import { ResultType } from '@indyecm/defs/types';
 
 export class Envelope<T> {
   public readonly Type: ResultType = ResultType.NoResultYet;

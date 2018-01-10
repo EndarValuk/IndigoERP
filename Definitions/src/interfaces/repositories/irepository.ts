@@ -1,5 +1,5 @@
-import { ObjectType, ModuleType } from '@indy/types';
-import { ICanCreateRepository, ICanDeleteRepository, ICanReadRepository, ICanUpdateRepository } from '@indy/datasource/repositories/interfaces';
+import { ObjectType, ModuleType } from '@indyecm/defs/types';
+import { ICanCreateRepository, ICanDeleteRepository, ICanReadRepository, ICanUpdateRepository } from '@indyecm/defs/interfaces/repositories';
 
 export interface IRepository<T, K> extends
   ICanCreateRepository<T>,
