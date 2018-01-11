@@ -18,21 +18,17 @@ export class Envelope<T> {
 
     if(value && value instanceof Error) {
       switch(value.name) {
-        case "SequelizeHostNotReachableError": {
+        case 'SequelizeHostNotReachableError': {
           this.Type = ResultType.ErrorDatabaseConnection;
         }break;
-        case "SequelizeUniqueConstraintError": {
+        case 'SequelizeUniqueConstraintError': {
           this.Type = ResultType.ErrorDatabaseCreateExists;
         }break;
-        case "SequelizeDatabaseError": {
+        case 'SequelizeDatabaseError': {
           this.Type = ResultType.ErrorDatabase;
         }break;
         default: {
           this.Type = ResultType.Error;
- 
-          console.log(value.name);
-          console.log(value.message);
-          console.log(value.stack);
         }break;
       }
       this.Value = undefined;

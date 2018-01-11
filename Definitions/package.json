@@ -1,6 +1,6 @@
 {
   "name": "@indyecm/defs",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "IndyECM definitions, enumerations, etc",
   "main": "index.js",
   "types": "index.d.ts",
@@ -15,7 +15,7 @@
   "private": true,
   "devDependencies": {
     "cpx": "^1.5.0",
-    "tslint": "^5.8.0",
+    "tslint": "^5.9.1",
     "typescript": "^2.6.2"
   },
   "dependencies": {}
