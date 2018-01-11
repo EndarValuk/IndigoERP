@@ -1,4 +1,4 @@
-import { ObjectQueryModel } from '@indyecm/defs/models';
+import { ObjectQueryModel } from './object';
 
 export class ObjectActionQueryModel extends ObjectQueryModel {
   public Ref_Action: number;
