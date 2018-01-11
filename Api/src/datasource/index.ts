@@ -1,7 +1,9 @@
 // Loading external dependencies.
-import { Sequelize, ISequelizeConfig } from 'sequelize-typescript';
+import { ISequelizeConfig, Sequelize } from 'sequelize-typescript';
+
 // Loading local dependencies.
 import { logger } from '@indyecm/api/handlers/log';
+
 // Loading configuration.
 const settings = require('@indyecm/api/config.json');
 
@@ -23,17 +25,18 @@ const config: ISequelizeConfig = {
   ],
 
   // SQLite only
-  //storage: 'path/to/database.sqlite'
+  // storage: 'path/to/database.sqlite'
   define: {
-    timestamps: false // true by default
+    timestamps: false, // true by default
   },
 
   pool: {
+    acquire: 3000,
+    idle: 10000,
     max: 5,
     min: 0,
-    acquire: 3000,
-    idle: 10000
   },
-}
+};
+
 const database = new Sequelize(config);
 export { database as databaseHandler };

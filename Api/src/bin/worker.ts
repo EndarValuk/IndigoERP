@@ -5,19 +5,22 @@ import * as koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
 import * as compression from 'koa-compress';
 import * as helmet from 'koa-helmet';
-import { Inject } from 'typescript-ioc';
 import { useKoaServer } from 'routing-controllers';
+import { Inject } from 'typescript-ioc';
+
+import { SystemStateType } from '@indyecm/defs/types';
 
 // Loading handlers and configuration.
+import { databaseHandler as db } from '@indyecm/api/datasource';
 import {
-  stateHandler,
   logger,
   poweredHandler,
-  timingHandler
+  stateHandler,
+  timingHandler,
 } from '@indyecm/api/handlers';
-import { databaseHandler as db } from '@indyecm/api/datasource';
+
 // Loading routes.
-import { SystemStateType } from '@indyecm/defs/types';
+
 import { Controllers } from '@indyecm/api/api/controllers';
 import { StateManager } from './state-manager';
 // Loading configuration.

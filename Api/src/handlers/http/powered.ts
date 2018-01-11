@@ -1,5 +1,5 @@
 // Loading external dependencies.
-import { Context } from "koa";
+import { Context } from 'koa';
 
 export const poweredHandler = async(ctx: Context, next: () => Promise<void>) => {
   // Set our own powered header here

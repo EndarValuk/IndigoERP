@@ -13,7 +13,7 @@ const Controllers = [
   ObjectActionController,
   ReferenceController,
 
-  UsersController
+  UsersController,
 ];
 
 export { Controllers };

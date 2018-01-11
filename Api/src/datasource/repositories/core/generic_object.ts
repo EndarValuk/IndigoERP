@@ -1,9 +1,10 @@
 // Loading external dependencies.
 import { Provides } from 'typescript-ioc';
+
 // Loading local dependencies.
-import { ResultType, ObjectType } from '@indyecm/defs/types';
-import { Envelope, ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
-import { ObjectActionQueryModel,  } from '@indyecm/api/api/models';
+import { Envelope, ObjectActionQueryModel, ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
+import { ObjectType, ResultType } from '@indyecm/defs/types';
+
 import { QueryBuildHandler } from '@indyecm/api/datasource/handlers';
 import { ObjectLog } from '@indyecm/api/datasource/models';
 import { BaseRepository } from '@indyecm/api/datasource/repositories';

@@ -1,9 +1,11 @@
 // Loading configuration.
 const config = require('@indyecm/api/config.json');
 const databaseDefinition = require('@indyecm/api/datasource/schema-config.json');
+
 // Loading local dependencies.
 import { ModuleType, ObjectType } from '@indyecm/defs/types';
-import { logger } from '@indyecm/api/handlers'
+
+import { logger } from '@indyecm/api/handlers';
 
 export class SchemaMappingHandler {
   public static GetDatabaseConfig(): any {
@@ -13,8 +15,9 @@ export class SchemaMappingHandler {
 
       return null;
     }
-    else
+    else {
       return dbQueries;
+    }
   }
 
   public static GetObjectConfig(application: ModuleType, objectType: ObjectType): any {

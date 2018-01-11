@@ -1,2 +1,2 @@
-# IndigoERP
-Individual development of ERP-system core
+# IndyECM
+Individual development of ECM(Enterprise Content Management) core application.

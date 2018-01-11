@@ -1,8 +1,10 @@
 // Loading external dependencies.
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { AutoIncrement, Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
+
 // Loading local dependencies.
 import { ModuleType, ObjectType } from '@indyecm/defs/types';
+
 import { SchemaMappingHandler } from '@indyecm/api/datasource/handlers';
 import { IReference } from '@indyecm/api/datasource/models/interfaces';
 

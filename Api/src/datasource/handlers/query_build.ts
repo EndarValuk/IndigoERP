@@ -1,5 +1,6 @@
 // Loading external dependencies.
 import { IDefineOptions } from 'sequelize-typescript/lib/interfaces/IDefineOptions';
+
 // Loading local dependencies.
 import { ObjectQueryModel, QueryModel } from '@indyecm/defs/models';
 import { ObjectType } from '@indyecm/defs/types';
@@ -22,7 +23,7 @@ export class QueryBuildHandler {
       q = {
         attributes: [''],
         group: [''],
-        where: {}
+        where: {},
       };
 
       if(entry.FieldsPredicate) {
@@ -32,27 +33,30 @@ export class QueryBuildHandler {
           q.attributes.push(fieldsArray[field].toLowerCase().trim());
         }
       }
-      else
+      else {
         delete q.attributes;
+      }
 
       if(entry.GroupBy) {
         q.group = entry.GroupBy.toLowerCase().split(',');
       }
-      else
+      else {
         delete q.group;
+      }
 
       if(entry.WherePredicate) {
         q.where = JSON.parse(JSON.stringify(entry.WherePredicate));
       }
-      else
+      else {
         delete q.where;
+      }
     }
     else if(entry && entry instanceof ObjectQueryModel) {
       q = {
         where: {
           ref_object: entry.Ref_Object,
-          ref_object_type: entry.Ref_ObjectType
-        }
+          ref_object_type: entry.Ref_ObjectType,
+        },
       };
     }
     else {
@@ -65,47 +69,45 @@ export class QueryBuildHandler {
     return {
       where: {
         ref_object: objectGuid,
-        ref_object_type: objectType
-      }
-    }
+        ref_object_type: objectType,
+      },
+    };
   }
 
   public static GetReferenceSelectQuery(request: ReferenceQueryModel) : string {
     let table = '';
 
-    request.Levels.forEach(element => {
+    request.Levels.forEach((element) => {
       table += `_${element}`;
     });
     table = table.slice(1, table.length);
     // Reading database schema mapping.
     let schema: IDefineOptions = SchemaMappingHandler.GetObjectConfig(request.Project, ObjectType.Generic).$schema_definitions.references[table];
     if(!schema) {
-      return "";
+      return '';
     }
     let dbSpecific = SchemaMappingHandler.GetDatabaseConfig().$schema_delimiter;
-    table = `${dbSpecific.begin}${schema.schema}${dbSpecific.end}.${dbSpecific.begin}${schema.tableName}${dbSpecific.end}`
+    table = `${dbSpecific.begin}${schema.schema}${dbSpecific.end}.${dbSpecific.begin}${schema.tableName}${dbSpecific.end}`;
     return QueryBuildHandler.GetPlainSelectTableQuery(request, table);
   }
 
   public static GetPlainSelectTableQuery(request: QueryModel, table: string): string {
-    let queryTemplate = "SELECT ";
+    let queryTemplate = 'SELECT ';
     // Checking unique constraint
     if(request.Distinct) {
-      queryTemplate += "DISTINCT";
+      queryTemplate += 'DISTINCT';
     }
     // Проверяем, задано ли условие ограничения по набору столбцов
-    queryTemplate += request.FieldsPredicate || "*";
+    queryTemplate += request.FieldsPredicate || '*';
     queryTemplate += ` FROM ${table} `;
     // Проверяем, задано ли условие ограничения по значениям
-    queryTemplate += request.WherePredicate || "";
+    queryTemplate += request.WherePredicate || '';
     // Проверяем, заданы ли настройки пропуска количества строк
-    if(request.Skip != 0 || request.Take !=0)
-    {
-      //TODO: queryTemplate = HandleRequestPaging(request, queryTemplate);
+    if(request.Skip !== 0 || request.Take !== 0) {
+      // TODO: queryTemplate = HandleRequestPaging(request, queryTemplate);
     }
-    else
-    {
-      queryTemplate += request.OrderBy || "";
+    else {
+      queryTemplate += request.OrderBy || '';
     }
     // TODO: Check for injections
     return queryTemplate;

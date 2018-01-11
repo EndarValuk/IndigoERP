@@ -1,5 +1,5 @@
 // Loading external dependencies.
-import { Controller, Body, Post } from 'routing-controllers';
+import { Body, Controller, Post } from 'routing-controllers';
 
 @Controller()
 export class EchoController {
@@ -7,8 +7,8 @@ export class EchoController {
    * Echoing request
    * @entry request body, which will be returned back
    */
-  @Post("/echo")
-  onPost(@Body({ validate: false }) entry: any) {
+  @Post('/echo')
+  public onPost(@Body({ validate: false }) entry: any) {
     return entry;
   }
 }

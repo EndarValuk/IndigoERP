@@ -1,11 +1,12 @@
 // Loading external dependencies.
-import { Provides } from "typescript-ioc";
+import { Provides } from 'typescript-ioc';
+
 // Loading local dependencies.
 import { Envelope, QueryModel } from '@indyecm/defs/models';
-import { ResultType, ObjectType, ModuleType } from '@indyecm/defs/types';
+import { ModuleType, ObjectType, ResultType } from '@indyecm/defs/types';
 
 import { QueryBuildHandler } from '@indyecm/api/datasource/handlers';
-import { User, ObjectProperty } from '@indyecm/api/datasource/models';
+import { ObjectProperty, User } from '@indyecm/api/datasource/models';
 import { BaseRepository } from '@indyecm/api/datasource/repositories';
 
 @Provides(UsersRepository)
@@ -18,23 +19,24 @@ export class UsersRepository extends BaseRepository<User, string> {
     let result: Envelope<User>;
 
     let predicate = {
-      where: { login: key }
+      where: { login: key },
     };
 
     try {
       let user = await User.findOne(predicate);
       if(user) {
         try {
-          user.setDataValue("object_properties", await ObjectProperty.all(QueryBuildHandler.GetOrmObjectWhereQuery(user.id, this.ObjectType)));
+          user.setDataValue('object_properties', await ObjectProperty.all(QueryBuildHandler.GetOrmObjectWhereQuery(user.id, this.ObjectType)));
         }
         catch(e) {
-          user.setDataValue("object_properties", []);
+          user.setDataValue('object_properties', []);
         }
 
         result = new Envelope<User>(ResultType.Success, user);
       }
-      else
+      else {
         result = new Envelope<User>(ResultType.ErrorDatabaseReadNotFound);
+      }
     }
     catch(e) {
       result = new Envelope(ResultType.ErrorDatabaseRead, e);
@@ -51,9 +53,9 @@ export class UsersRepository extends BaseRepository<User, string> {
         let q = QueryBuildHandler.GetOrmQuery(key);
         users = await User.findAll(q);
       }
-      else
+      else {
         users = await User.all();
-
+      }
       result = new Envelope<User[]>(ResultType.Success, users);
     }
     catch(e) {
@@ -68,8 +70,8 @@ export class UsersRepository extends BaseRepository<User, string> {
     let q = {
       query: this.QueryManager.create_procedure,
       values: [
-        JSON.stringify(entry)
-      ]
+        JSON.stringify(entry),
+      ],
     };
 
     try {

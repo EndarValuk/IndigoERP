@@ -1,12 +1,13 @@
 // Loading external dependencies.
-import { Context } from "koa";
+import { Context } from 'koa';
+
 // Loading local dependencies.
 import { logger } from '@indyecm/api/handlers';
 
 /**
- * 
- * @param ctx 
- * @param next 
+ *
+ * @param ctx
+ * @param next
  */
 export const timingHandler = async(ctx: Context, next: () => Promise<void>) => {
   // Check start time
