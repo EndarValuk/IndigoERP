@@ -5,6 +5,7 @@
   ],
   "jsRules": {},
   "rules": {
+    "align": false,
     "max-line-length": false,
     "no-bitwise": false,
     "one-line": [

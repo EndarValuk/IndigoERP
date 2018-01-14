@@ -72,9 +72,10 @@
     "Anubis": {
       "User": {
         "$schema_definitions": {
-          "schema": "dbo",
-          "tableName": "system.users"
-        }
+          "schema": "Anubis",
+          "tableName": "Users"
+        },
+        "create_procedure": "EXECUTE [Anubis].[Create.User] ?"
       }
     }
   }

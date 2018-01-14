@@ -11,7 +11,7 @@ import { BaseRepository } from '@indyecm/api/datasource/repositories';
 
 @Provides(UsersRepository)
 export class UsersRepository extends BaseRepository<User, string> {
-  constructor() {
+  public constructor() {
     super(ObjectType.User, ModuleType.Anubis);
   }
 
@@ -76,7 +76,7 @@ export class UsersRepository extends BaseRepository<User, string> {
 
     try {
       let u = await User.sequelize.query(q);
-      result = new Envelope<User>(ResultType.Success, u[0][0]);
+      result = new Envelope<User>(u[0][0].Type, u[0][1], u[0][0].Message);
     }
     catch(e) {
       result = new Envelope<User>(ResultType.ErrorDatabaseCreate, e);
